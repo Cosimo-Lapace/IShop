@@ -1,4 +1,45 @@
-<p *ngFor="let product of products">
+<!-- <p *ngFor="let product of products">
   {{product.name}}: {{product.unitPrice | currency:'EUR':true}}
   <img src="{{product.imageUrl}}" alt="{{product.imageUrl}}" width="50px" class="img-fluid">
-</p>
+</p> -->
+<!-- MAIN CONTENT-->
+<div class="main-content">
+  <div class="section-content section-content-p30 section-product-list">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 card-product">
+          <div class="product-box">
+            <a href="product-detail.html">
+              <img
+                src="assets/images/products/placeholder.png"
+                class="img-fluid"
+              />
+            </a>
+            <a href="product-detail.html">
+              <h1>Lorem ipsum dolor sit amet</h1>
+            </a>
+            <h2>Duis aute irure dolor in reprehenderit in voluptate</h2>
+            <div class="price">19.22 $</div>
+            <a href="#" class="primary-btn">Add to cart</a>
+          </div>
+        </div>
+        <div class="col-md-3 card-product">
+          <div class="product-box">
+            <a href="product-detail.html">
+              <img
+                src="assets/images/products/placeholder.png"
+                class="img-fluid"
+              />
+            </a>
+            <a href="product-detail.html">
+              <h1>Lorem ipsum dolor sit amet</h1>
+            </a>
+            <h2>Duis aute irure dolor in reprehenderit in voluptate</h2>
+            <div class="price">19.22 $</div>
+            <a href="#" class="primary-btn">Add to cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

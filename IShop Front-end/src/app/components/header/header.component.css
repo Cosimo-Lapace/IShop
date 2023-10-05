@@ -92,7 +92,7 @@ section{
   right:0;
   min-width:95px;
   color:#fff;
-  border:1px solid #205b8d;
+  border:1px solid var(--border-color);
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:43px;
@@ -119,7 +119,7 @@ section{
   line-height:43px;
   color:#fff;
   border-radius:30px;
-  border:1px solid #0da8e4;
+  border:1px solid var(--border-color);
   float:left;
   margin-top:7px;
   padding-left:17px
@@ -230,7 +230,7 @@ header.header-desktop.extra{
   right:10px;
   min-width:85px;
   color:#fff;
-  border:1px solid #205b8d;
+  border:1px solid var(--border-color);
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:0;
@@ -263,11 +263,11 @@ header.header-desktop.extra{
   margin-left:6px
 }
 .total{
-  background:#205b8d;
+  background:var(--border-color);
   line-height:30px;
   color:#fff;
   border-radius:30px;
-  border:1px solid #205b8d;
+  border:1px solid var(--border-color);
   float:left;
   margin-top:9px;
   padding-left:12px
