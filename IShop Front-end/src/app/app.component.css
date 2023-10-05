@@ -1,1 +1,18 @@
-
+.page-container{
+  background:#e5e5e5;
+  padding-left:200px
+}
+@media (max-width:991px){
+  .page-container{
+    position:relative;
+    top:88px;
+    padding-left:0
+}
+}
+@media (max-width:767px){
+  .page-container{
+    position:relative;
+    top:66px;
+    padding-left:0
+}
+}

@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit, OnDestroy {
-   products: Product[] = [];
+  products: Product[] = [];
   private ProductsSubscription: Subscription;
 
   constructor(private productSerive: ProductService) {}
@@ -19,11 +19,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.ProductsSubscription = this.productSerive
       .getProductList()
       .subscribe((data) => {
-          this.products = data;
+        this.products = data;
+        console.log(this.products);
       });
+
   }
 
   ngOnDestroy(): void {
-  this.ProductsSubscription.unsubscribe();
+    this.ProductsSubscription.unsubscribe();
   }
 }
