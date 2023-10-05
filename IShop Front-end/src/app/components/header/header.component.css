@@ -54,7 +54,7 @@
   font-size:14px;
   color:#666;
   padding:0 17px;
-  width: 1000px;
+  width: 500px;
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:3px;
@@ -144,7 +144,7 @@ section{
 
 .header-desktop{
   position:relative;
-  top:0;
+  top:-85px !important;
   left:0;
   height:80px
 }
@@ -194,9 +194,11 @@ header.header-desktop.extra{
 }
 }
 @media (min-width:992px) and (max-width:1199px){
-  .header-wrap{
-    display: none;
+
+  .au-input{
+    width: 100%;
   }
+
   .cart-area i{
     font-size:22px;
     float:left;
@@ -204,6 +206,7 @@ header.header-desktop.extra{
     color:#205b8d;
     margin-left:15px
 }
+
 }
 @media (max-width:767px){
 
@@ -212,7 +215,7 @@ header.header-desktop.extra{
 }
 .header-desktop{
   position:relative;
-  top:0;
+  top:-65px !important;
   left:0;
   height:80px
 }
@@ -231,7 +234,7 @@ header.header-desktop.extra{
   -webkit-border-radius:3px;
   -moz-border-radius:3px;
   border-radius:0;
-  background:#205b8d
+  background: var(--button-color);
 }
 .cart-area i{
   font-size:22px;
@@ -275,3 +278,19 @@ header.header-desktop.extra{
       padding:0 15px
   }
 }
+@media (max-width:600px){
+  .au-input{
+    width: 300px !important;
+  }
+}
+@media (max-width:390px){
+  .au-input{
+    width: 200px !important;
+  }
+}
+@media (max-width:300px){
+  .au-input{
+    width: 100px !important;
+  }
+}
+
