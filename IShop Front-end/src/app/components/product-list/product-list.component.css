@@ -1,6 +1,6 @@
 
 .main-content{
-  padding-top:116px;
+  padding-top:30px;
   min-height:100vh;
   background:var(--background-color);
 }
@@ -9,6 +9,7 @@
 }
 .product-box img {
   width: 150px;
+  height: 200px;
 }
 .product-box{
   margin-bottom:60px
@@ -32,6 +33,7 @@
 }
 .card-product{
   width: 350px;
+  height: 450px;
   border: 1px solid var(--border-color);
   border-radius: 43px;
   padding: 20px;
@@ -40,7 +42,7 @@
   -webkit-box-shadow:3px 6px 9px 0 rgba(0,0,0,.1);
   -moz-box-shadow:3px 6px 9px 0 rgba(0,0,0,.1);
   box-shadow:3px 6px 9px 0 rgba(0,0,0,.1);
-  margin: 0 20px;
+  margin: 10px 20px;
 }
 .product-box a:nth-child(2){
   text-decoration: none;
