@@ -36,11 +36,10 @@ export class ProductListComponent
     let description = document.querySelectorAll('.description');
     let name = document.querySelectorAll('.name');
 
-    console.log(description);
+
     description.forEach((el, i) => {
       if (el.innerHTML.length > 101) {
         let text = el.innerHTML.slice(0, 101 - 3) + '...';
-        console.log(text);
         el.innerHTML = text;
       }
       if (name[i].innerHTML.length < 25) {
