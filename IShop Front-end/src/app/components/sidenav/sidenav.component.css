@@ -83,6 +83,9 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
 a {
   text-decoration: none;
 }
+.active-link{
+  font-weight: bold;
+}
 @media (max-width:991px) {
   .page-wrapper{
     padding-bottom: 0vh !important;
