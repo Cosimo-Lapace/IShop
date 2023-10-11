@@ -1,12 +1,11 @@
 import {
   AfterViewChecked,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
-  ViewChild,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 import { Product } from 'src/app/model/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -20,23 +19,52 @@ export class ProductListComponent
   implements OnInit, AfterViewChecked, OnDestroy
 {
   products: Product[] = [];
-  private ProductsSubscription: Subscription;
 
-  constructor(private productSerive: ProductService) {}
+  currentCategoryId: number;
 
-  ngOnInit(): void {
-    this.ProductsSubscription = this.productSerive
+  constructor(
+    private productSerive: ProductService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
+  getRouteParamsById() {
+    // check id exist
+    const isCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+    console.log(isCategoryId);
+    if (isCategoryId) {
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+      console.log(this.currentCategoryId);
+    } else {
+      this.currentCategoryId = 1;
+    }
+    this.productSerive.getProductByCategoryId(this.currentCategoryId).subscribe(data => this.products = data);
+
+
+  }
+  getProductList() {
+     this.productSerive
       .getProductList()
       .subscribe((data) => {
         this.products = data;
       });
   }
 
+
+  //lifecycle
+  ngOnInit(): void {
+   this.route.paramMap.subscribe(()=>{
+    if(!this.route.snapshot.paramMap.has('id') || +this.route.snapshot.paramMap.get('id') === 0){
+      this.getProductList()
+    }else{
+      this.getRouteParamsById();
+    }
+
+   })
+  }
+
   ngAfterViewChecked(): void {
     let description = document.querySelectorAll('.description');
     let name = document.querySelectorAll('.name');
-
-
     description.forEach((el, i) => {
       if (el.innerHTML.length > 101) {
         let text = el.innerHTML.slice(0, 101 - 3) + '...';
@@ -50,9 +78,11 @@ export class ProductListComponent
         name[i].innerHTML = nameTextSlice;
       }
     });
+
   }
 
   ngOnDestroy(): void {
-    this.ProductsSubscription.unsubscribe();
+
   }
+
 }
