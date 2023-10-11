@@ -11,6 +11,9 @@
   width: 150px;
   height: 200px;
 }
+.name{
+  max-height: 67px !important;
+}
 .product-box{
   margin-bottom:60px
 }

@@ -1,5 +1,5 @@
 import {
-  AfterViewChecked,
+  AfterContentChecked,
   Component,
   OnDestroy,
   OnInit,
@@ -16,7 +16,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css', '../header/header.component.css'],
 })
 export class ProductListComponent
-  implements OnInit, AfterViewChecked, OnDestroy
+  implements OnInit, AfterContentChecked, OnDestroy
 {
   products: Product[] = [];
 
@@ -62,7 +62,7 @@ export class ProductListComponent
    })
   }
 
-  ngAfterViewChecked(): void {
+  ngAfterContentChecked(): void {
     let description = document.querySelectorAll('.description');
     let name = document.querySelectorAll('.name');
     description.forEach((el, i) => {
