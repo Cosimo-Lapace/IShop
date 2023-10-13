@@ -8,17 +8,9 @@ import { ProductCategoryService } from 'src/app/services/product-category.servic
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css']
 })
-export class SidenavComponent implements OnInit {
-
-  productCaegoryId : number = 1;
-  productCategory: ProductCategory[] = [];
-  constructor(private productCategorySerice: ProductCategoryService,){}
+export class SidenavComponent  {
 
 
-  ngOnInit(): void {
-    this.productCategorySerice.getProductList().subscribe(data => {
-       this.productCategory = data
-    })
 
   }
-}
+

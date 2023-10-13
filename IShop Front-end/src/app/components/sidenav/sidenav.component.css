@@ -65,11 +65,11 @@ aside.menu-sidebar.d-none.d-lg-block.clr{
   padding:5px 0
 }
 
-.navbar-sidebar .navbar-list li a i{
+.navbar-sidebar {
   margin-right:19px
 }
 
-.navbar-sidebar .navbar-list li a:hover{
+.navbar-sidebar{
   color:var(--primary-color)
 }
 .navbar-list .navbar-sub-list{

@@ -9,10 +9,11 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { Error404Component } from './error/error404/error404.component';
+import { ProductCategoryComponent } from './components/product-category/product-category.component';
 
 
 @NgModule({
-  declarations: [AppComponent, ProductListComponent, SidenavComponent, HeaderComponent, FooterComponent, Error404Component],
+  declarations: [AppComponent, ProductListComponent, SidenavComponent, HeaderComponent, FooterComponent, Error404Component, ProductCategoryComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

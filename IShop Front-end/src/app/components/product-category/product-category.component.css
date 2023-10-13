@@ -1,0 +1,9 @@
+.navbar-list li a{
+  display:block;
+  color:#555;
+  font-size:16px;
+  padding:5px 0
+}
+.navbar-list li a:hover{
+  color:var(--primary-color)
+}
