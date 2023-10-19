@@ -10,10 +10,19 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { Error404Component } from './error/error404/error404.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
-
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
-  declarations: [AppComponent, ProductListComponent, SidenavComponent, HeaderComponent, FooterComponent, Error404Component, ProductCategoryComponent],
+  declarations: [
+    AppComponent,
+    ProductListComponent,
+    SidenavComponent,
+    HeaderComponent,
+    FooterComponent,
+    Error404Component,
+    ProductCategoryComponent,
+    SearchComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],

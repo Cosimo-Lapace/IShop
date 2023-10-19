@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-
 import { Product } from 'src/app/model/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -21,48 +20,76 @@ export class ProductListComponent
   products: Product[] = [];
 
   currentCategoryId: number;
+  searchMode: boolean = false;
 
   constructor(
     private productSerive: ProductService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+   //check if param productname is trigger
+   listProduct(){
+    this.searchMode = this.route.snapshot.paramMap.has('productname');
+    if (this.searchMode) {
+      this.handleSearchProducts();
+    } else {
+      this.getRouteParamsById();
+    }
+  }
+  //if param productname exsist
+  handleSearchProducts() {
+    const searchInput: string = this.route.snapshot.paramMap.get('productname');
+    this.productSerive.searchProductByName(searchInput).subscribe(data => this.products = data);
+  }
+
+  //else
+  //search by Product-categoryId
   getRouteParamsById() {
     // check id exist
     const isCategoryId: boolean = this.route.snapshot.paramMap.has('id');
-    console.log(isCategoryId);
     if (isCategoryId) {
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
-      console.log(this.currentCategoryId);
     } else {
+      //else return in category 1
       this.currentCategoryId = 1;
     }
-    this.productSerive.getProductByCategoryId(this.currentCategoryId).subscribe(data => this.products = data);
-
-
+    //send in view page
+    this.productSerive
+      .getProductByCategoryId(this.currentCategoryId)
+      .subscribe((data) => (this.products = data));
+      //end search by product-categoryId
   }
+
+
+
+
   getProductList() {
-     this.productSerive
-      .getProductList()
-      .subscribe((data) => {
-        this.products = data;
-      });
+    //send all product in view page
+    this.productSerive.getProductList().subscribe((data) => {
+      this.products = data;
+    });
+    // end get all product
   }
-
 
   //lifecycle
   ngOnInit(): void {
-   this.route.paramMap.subscribe(()=>{
-    if(!this.route.snapshot.paramMap.has('id') || +this.route.snapshot.paramMap.get('id') === 0){
-      this.getProductList()
-    }else{
-      this.getRouteParamsById();
-    }
-
-   })
+    // check if params id not exist and id === 0 for external manage by user
+    this.route.paramMap.subscribe(() => {
+      if (
+        !this.route.snapshot.paramMap.has('id') ||
+        +this.route.snapshot.paramMap.get('id') === 0
+      ) {
+        this.getProductList();
+      } else {
+        this.getRouteParamsById();
+      }
+    });
+    //end check params
   }
 
   ngAfterContentChecked(): void {
+    // fix issue for long text
     let description = document.querySelectorAll('.description');
     let name = document.querySelectorAll('.name');
     description.forEach((el, i) => {
@@ -78,11 +105,8 @@ export class ProductListComponent
         name[i].innerHTML = nameTextSlice;
       }
     });
-
+    //end fix
   }
 
-  ngOnDestroy(): void {
-
-  }
-
+  ngOnDestroy(): void {}
 }

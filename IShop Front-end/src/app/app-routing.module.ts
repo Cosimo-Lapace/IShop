@@ -5,6 +5,10 @@ import { Error404Component } from './error/error404/error404.component';
 
 const routes: Routes = [
   {
+    path:'search/:productname',
+    component:ProductListComponent,
+  },
+  {
     path: 'category/:id',
     component: ProductListComponent,
   },

@@ -26,7 +26,10 @@ export class ProductService {
       map(response => response._embedded.products)
     )
   }
+  searchProductByName(searchInput : string):Observable<Product[]>{
+    return null;
 
+  }
 
 
 

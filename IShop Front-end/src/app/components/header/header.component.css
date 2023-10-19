@@ -41,32 +41,9 @@
   -ms-flex-pack:justify;
   justify-content:space-between
 }
-.form-header{
-  display:-webkit-box;
-  display:-webkit-flex;
-  display:-moz-box;
-  display:-ms-flexbox;
-  display:flex
-}
-.au-input{
-  line-height:43px;
-  border:1px solid #e5e5e5;
-  font-size:14px;
-  color:#666;
-  padding:0 17px;
-  width: 500px;
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:3px;
-  -webkit-transition:all .5s ease;
-  -o-transition:all .5s ease;
-  -moz-transition:all .5s ease;
-  transition:all .5s ease
-}
-input.au-input.au-input-xl{
-  border-radius:40px!important;
-  margin-right:15px
-}
+
+
+
 
 section{
   position:relative
@@ -87,21 +64,9 @@ section{
 .section-content.section-content-p30{
   padding-top:100px
 }
-.au-btn-submit{
-  position:relative;
-  right:0;
-  min-width:95px;
-  color:#fff;
-  border:1px solid var(--border-color);
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:43px;
-  background: var(--button-color)
-}
 
-.au-btn-submit:hover{
-  background:var(--button-color-hover)
-}
+
+
 .cart-area.d-n{
   display:block
 }
@@ -135,11 +100,7 @@ section{
   margin-left:11px
 }
 
-@media (max-width:1600px){
-  .au-input-xl{
-    min-width:290px
-}
-}
+
 @media (max-width:991px){
 
 .header-desktop{
@@ -158,23 +119,9 @@ section{
   -ms-flex-direction:column;
   flex-direction:column
 }
-.form-header{
-  -webkit-box-pack:center;
-  -webkit-justify-content:center;
-  -moz-box-pack:center;
-  -ms-flex-pack:center;
-  justify-content:center
-}
-.au-input-xl{
-  min-width:935px
-}
-input.au-input.au-input-xl{
-  border-radius:0!important;
-  margin-right:0
-}
-.au-input-xl{
-  min-width:350px
-}
+
+
+
 .section-content-p30{
   padding:0
 }
@@ -195,9 +142,7 @@ header.header-desktop.extra{
 }
 @media (min-width:992px) and (max-width:1199px){
 
-  .au-input{
-    width: 100%;
-  }
+
 
   .cart-area i{
     font-size:22px;
@@ -219,23 +164,11 @@ header.header-desktop.extra{
   left:0;
   height:80px
 }
-.au-input-xl{
-  min-width:150px
-}
+
 .section-content.section-content-p30{
   padding-top:100px
 }
-.au-btn-submit{
-  position:relative;
-  right:10px;
-  min-width:85px;
-  color:#fff;
-  border:1px solid var(--border-color);
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:0;
-  background: var(--button-color);
-}
+
 .cart-area i{
   font-size:22px;
   float:left;
@@ -278,19 +211,6 @@ header.header-desktop.extra{
       padding:0 15px
   }
 }
-@media (max-width:600px){
-  .au-input{
-    width: 300px !important;
-  }
-}
-@media (max-width:390px){
-  .au-input{
-    width: 200px !important;
-  }
-}
-@media (max-width:300px){
-  .au-input{
-    width: 100px !important;
-  }
-}
+
+
 
