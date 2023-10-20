@@ -27,7 +27,10 @@ export class ProductService {
     )
   }
   searchProductByName(searchInput : string):Observable<Product[]>{
-    return null;
+
+    return this.httpClient.get<GetResponse>(`${this.baseUrlApi}/search/findByNameContaining?name=${searchInput}`).pipe(
+      map(response => response._embedded.products)
+    );
 
   }
 

@@ -18,9 +18,9 @@ export class ProductListComponent
   implements OnInit, AfterContentChecked, OnDestroy
 {
   products: Product[] = [];
-
   currentCategoryId: number;
   searchMode: boolean = false;
+  productExsist: boolean = true;
 
   constructor(
     private productSerive: ProductService,
@@ -28,19 +28,18 @@ export class ProductListComponent
     private router: Router
   ) {}
 
-   //check if param productname is trigger
-   listProduct(){
-    this.searchMode = this.route.snapshot.paramMap.has('productname');
-    if (this.searchMode) {
-      this.handleSearchProducts();
-    } else {
-      this.getRouteParamsById();
-    }
-  }
   //if param productname exsist
   handleSearchProducts() {
     const searchInput: string = this.route.snapshot.paramMap.get('productname');
-    this.productSerive.searchProductByName(searchInput).subscribe(data => this.products = data);
+    this.productSerive.searchProductByName(searchInput).subscribe((data) => {
+      this.products = data;
+      //checking whether the result led to a correct search
+      if (this.products.length === 0) {
+        this.productExsist = false;
+      } else {
+        this.productExsist = true;
+      }
+    });
   }
 
   //else
@@ -58,11 +57,8 @@ export class ProductListComponent
     this.productSerive
       .getProductByCategoryId(this.currentCategoryId)
       .subscribe((data) => (this.products = data));
-      //end search by product-categoryId
+    //end search by product-categoryId
   }
-
-
-
 
   getProductList() {
     //send all product in view page
@@ -76,13 +72,12 @@ export class ProductListComponent
   ngOnInit(): void {
     // check if params id not exist and id === 0 for external manage by user
     this.route.paramMap.subscribe(() => {
-      if (
-        !this.route.snapshot.paramMap.has('id') ||
-        +this.route.snapshot.paramMap.get('id') === 0
-      ) {
-        this.getProductList();
-      } else {
+      if (this.route.snapshot.paramMap.has('id')) {
         this.getRouteParamsById();
+      } else if (this.route.snapshot.paramMap.has('productname')) {
+        this.handleSearchProducts();
+      } else {
+        this.getProductList();
       }
     });
     //end check params
