@@ -20,7 +20,6 @@ export class ProductListComponent
   products: Product[] = [];
   currentCategoryId: number;
   searchMode: boolean = false;
-  productExsist: boolean = true;
 
   constructor(
     private productSerive: ProductService,
@@ -31,15 +30,9 @@ export class ProductListComponent
   //if param productname exsist
   handleSearchProducts() {
     const searchInput: string = this.route.snapshot.paramMap.get('productname');
-    this.productSerive.searchProductByName(searchInput).subscribe((data) => {
-      this.products = data;
-      //checking whether the result led to a correct search
-      if (this.products.length === 0) {
-        this.productExsist = false;
-      } else {
-        this.productExsist = true;
-      }
-    });
+    this.productSerive
+      .searchProductByName(searchInput)
+      .subscribe((data) => (this.products = data));
   }
 
   //else

@@ -11,6 +11,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { Error404Component } from './error/error404/error404.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
 import { SearchComponent } from './components/search/search.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SearchComponent } from './components/search/search.component';
     Error404Component,
     ProductCategoryComponent,
     SearchComponent,
+    ProductDetailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],

@@ -4,20 +4,20 @@
   <div class="section-content section-content-p30 section-product-list">
     <div class="container-fluid">
       <div class="row">
-          <div class="col-md-12 text-center" *ngIf="!productExsist">
-            <h3>This search brought no results :-(</h3>
+          <div class="col-md-12 text-center" *ngIf="products?.length == 0">
+            <h3>Products Not Found Please</h3>
             <h3>Try again</h3>
           </div>
         <div class="col-md-3 card-product" *ngFor="let product of products">
           <div class="product-box">
-            <a href="product-detail.html">
+            <a routerLink="products/{{product.id}}">
               <img
                 src="{{product.imageUrl}}"
                 alt="{{product.imageUrl}}"
                 class="img-fluid"
               />
             </a>
-            <a href="product-detail.html">
+            <a routerLink="products/{{product.id}}">
               <h3 class="name">{{product.name}}</h3>
             </a>
             <h2 #description class="description">{{product.description}}</h2>
