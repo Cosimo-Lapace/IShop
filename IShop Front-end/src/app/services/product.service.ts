@@ -26,6 +26,10 @@ export class ProductService {
       map(response => response._embedded.products)
     )
   }
+  getProductById(id:number) : Observable<Product>
+  {
+    return this.httpClient.get<Product>(`${this.baseUrlApi}/${id}`);
+  }
   searchProductByName(searchInput : string):Observable<Product[]>{
 
     return this.httpClient.get<GetResponse>(`${this.baseUrlApi}/search/findByNameContaining?name=${searchInput}`).pipe(
