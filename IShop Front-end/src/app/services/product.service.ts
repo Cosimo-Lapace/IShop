@@ -5,45 +5,49 @@ import { map } from 'rxjs/operators';
 import { Product } from '../model/product';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
+  private baseUrlApi = 'http://localhost:8080/api/products';
 
-  private baseUrlApi = "http://localhost:8080/api/products";
+  constructor(private httpClient: HttpClient) {}
 
-
-  constructor(private httpClient: HttpClient) { }
-
-  getProductList() : Observable<Product[]>{
-
-      return this.httpClient.get<GetResponse>(this.baseUrlApi).pipe(
-        map(response => response._embedded.products)
-      )
+  getProductByCategoryIdPaginate(page : number,pageSize:number, id:number): Observable<GetResponse> {
+    return this.httpClient
+      .get<GetResponse>(`${this.baseUrlApi}/search/findByCategoryId?id=${id}&page=${page}&size=${pageSize}`);
   }
-  getProductByCategoryId(id:number) : Observable<Product[]>
-  {
-    return this.httpClient.get<GetResponse>(`${this.baseUrlApi}/search/findByCategoryId?id=${id}`).pipe(
-      map(response => response._embedded.products)
-    )
+
+  getProductList(page:number,pageSize:number): Observable<GetResponse> {
+    return this.httpClient
+      .get<GetResponse>(`${this.baseUrlApi}?page=${page}&size=${pageSize}`)
   }
-  getProductById(id:number) : Observable<Product>
-  {
+
+  getProductByCategoryId(id: number): Observable<Product[]> {
+    return this.httpClient
+      .get<GetResponse>(`${this.baseUrlApi}/search/findByCategoryId?id=${id}`)
+      .pipe(map((response) => response._embedded.products));
+  }
+  getProductById(id: number): Observable<Product> {
     return this.httpClient.get<Product>(`${this.baseUrlApi}/${id}`);
   }
-  searchProductByName(searchInput : string):Observable<Product[]>{
-
-    return this.httpClient.get<GetResponse>(`${this.baseUrlApi}/search/findByNameContaining?name=${searchInput}`).pipe(
-      map(response => response._embedded.products)
-    );
-
+  searchProductByName(searchInput: string): Observable<Product[]> {
+    return this.httpClient
+      .get<GetResponse>(
+        `${this.baseUrlApi}/search/findByNameContaining?name=${searchInput}`
+      )
+      .pipe(map((response) => response._embedded.products));
   }
-
-
-
 }
 
-interface GetResponse{
-  _embedded:{
-    products:Product[];
-  }
+interface GetResponse {
+  _embedded: {
+    products: Product[];
+  },
+  page:{
+    size:number,
+    totalElements:number,
+    totalPages : number,
+    number : number,
+  };
+
 }

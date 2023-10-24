@@ -12,6 +12,7 @@ import { Error404Component } from './error/error404/error404.component';
 import { ProductCategoryComponent } from './components/product-category/product-category.component';
 import { SearchComponent } from './components/search/search.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     SearchComponent,
     ProductDetailComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [],
   bootstrap: [AppComponent],
 })
