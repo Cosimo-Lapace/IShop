@@ -21,7 +21,7 @@ public class DataRestConfig implements RepositoryRestConfigurer {
     private EntityManager entityManager;
 
     @Autowired
-    public DataRestConfig(EntityManager entityManager){
+    public DataRestConfig(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
@@ -46,13 +46,13 @@ public class DataRestConfig implements RepositoryRestConfigurer {
 
     //metodo per rendere disponibile tutti gli id di tutte le varie entità
     //quindi mi restituisce i json con l'id del databa
-    private void exposeIds(RepositoryRestConfiguration config){
+    private void exposeIds(RepositoryRestConfiguration config) {
         //creo un istanza delle varie entità prendendo il modello che restituisce
         Set<EntityType<?>> entityTypes = this.entityManager.getMetamodel().getEntities();
         //creo una lista di classi
         List<Class> entityClass = new ArrayList<>();
         //inserisco i vari entity tipe nella mia lista
-        for(EntityType entityType : entityTypes){
+        for (EntityType entityType : entityTypes) {
             entityClass.add(entityType.getJavaType());
         }
         //creo un array di classi nella quale inserisco le classi sopra citate

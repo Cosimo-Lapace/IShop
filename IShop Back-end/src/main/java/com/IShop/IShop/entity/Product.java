@@ -19,7 +19,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
     @Column(name = "sku")
     private String sku;
 
@@ -52,7 +51,6 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
-
 
 
 }
