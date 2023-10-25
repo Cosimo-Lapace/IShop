@@ -71,6 +71,23 @@ a.primary-btn:hover{
   font-weight:800;
   color:var(--button-color)
 }
+.div-paginator{
+  padding-left: 68%;
+  padding-top: 2%;
+
+}
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  background-color: var(--background-color);
+  color: var(--primary-color) !important;
+  font-weight:600;
+
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  border-color: transparent !important;
+  box-shadow: 0 0 0 0rem  transparent;
+  background-color: var(--primary-color) !important;
+}
 
 @media (max-width:991px){
 

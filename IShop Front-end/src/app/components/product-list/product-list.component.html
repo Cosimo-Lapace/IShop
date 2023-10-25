@@ -3,10 +3,16 @@
   <div class="section-content section-content-p30 section-product-list">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 text-center" *ngIf="products?.length == 0">
-          <h3>Products Not Found Please</h3>
-          <h3>Try again</h3>
+        <!-- Error Product Not Found -->
+        <div class="col-md-12 text-center" *ngIf="products?.length == 0 && IsServerOnline">
+         <app-product-not-found></app-product-not-found>
         </div>
+        <!-- end Error Product Not Found -->
+        <!-- generic Error or loading -->
+        <div class="col-md-12 text-center" *ngIf="!IsServerOnline">
+          <app-spinner [isServerOnline]="IsServerOnline"></app-spinner>
+        </div>
+        <!-- end Error -->
         <div class="col-md-3 card-product" *ngFor="let product of products">
           <div class="product-box">
             <a routerLink="/products/{{ product.id }}">
@@ -31,24 +37,33 @@
       </div>
     </div>
     <!-- paginator -->
-    <div class="footer-pagination">
+    <div class="footer-pagination"  *ngIf="products?.length !== 0 && IsServerOnline">
       <div class="row">
         <div class="col-md-6"></div>
         <div class="col-md-6">
           <div class="row">
-            <div class="col-md-9" style="padding-left: 68%; padding-top: 2%;">
-                <ngb-pagination
-                *ngIf="products?.length !== 0"
+            <div class="col-md-9" class="div-paginator">
+              <ngb-pagination
                 [(page)]="pageNumber"
                 [pageSize]="pageSize"
                 [collectionSize]="totalElement"
-                (pageChange)=" pageChange()"
-                ></ngb-pagination>
+                (pageChange)="pageChange()"
+              >
+              </ngb-pagination>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- end paginator -->
+    <div class="col-md-3 mt-3" style="text-align: right;" *ngIf="products?.length !== 0 && IsServerOnline">
+      <span class="mr-2">Page Size</span>
+        <select name="" id="">
+          <option selected="true">5</option>
+          <option>10</option>
+          <option>20</option>
+          <option>50</option>
+        </select>
+    </div>
   </div>
 </div>

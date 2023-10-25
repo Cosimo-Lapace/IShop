@@ -9,6 +9,7 @@
 }
 :root{
   --primary-color:#ea0f0b;
+  --box-shadow-color: #fdd9d8;
   --button-color:#2c363f;
   --button-color-hover:#191f24;
   --secondary-color:#feecec;

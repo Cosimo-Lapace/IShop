@@ -13,6 +13,8 @@ import { ProductCategoryComponent } from './components/product-category/product-
 import { SearchComponent } from './components/search/search.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SpinnerComponent } from './utilities/spinner/spinner.component';
+import { ProductNotFoundComponent } from './utilities/product-not-found/product-not-found.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductCategoryComponent,
     SearchComponent,
     ProductDetailComponent,
+    SpinnerComponent,
+    ProductNotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [],

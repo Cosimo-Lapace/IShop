@@ -18,6 +18,7 @@ export class ProductListComponent
   implements OnInit, AfterContentChecked, OnDestroy
 {
   products: Product[] = [];
+  IsServerOnline = true;
   currentCategoryId: number;
   searchMode: boolean = false;
   //paginate
@@ -39,7 +40,9 @@ export class ProductListComponent
     const searchInput: string = this.route.snapshot.paramMap.get('productname');
     this.productSerive
       .searchProductByName(searchInput)
-      .subscribe((data) => (this.products = data));
+      .subscribe((data) => (this.products = data),(error) =>{
+        this.IsServerOnline = false;
+    });
   }
 
   //else
@@ -65,7 +68,9 @@ export class ProductListComponent
           (this.pageNumber = data.page.number + 1),
           (this.pageSize = data.page.size);
         this.totalElement = data.page.totalElements;
-      });
+      },(error) =>{
+        this.IsServerOnline = false;
+    });
     //end search by product-categoryId
   }
 
@@ -79,7 +84,10 @@ export class ProductListComponent
           (this.pageNumber = data.page.number + 1),
           (this.pageSize = data.page.size);
         this.totalElement = data.page.totalElements;
-      });
+      },(error) =>{
+          this.IsServerOnline = false;
+      }
+      );
     // end get all product
   }
 
@@ -96,6 +104,7 @@ export class ProductListComponent
       }
     });
     //end check params
+
   }
 
   ngAfterContentChecked(): void {
@@ -116,6 +125,7 @@ export class ProductListComponent
       }
     });
     //end fix
+
   }
 
   ngOnDestroy(): void {}
