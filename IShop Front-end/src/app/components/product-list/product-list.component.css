@@ -72,10 +72,13 @@ a.primary-btn:hover{
   color:var(--button-color)
 }
 .div-paginator{
-  padding-left: 68%;
+  padding-left: 15%;
+  padding-right: 0%;
   padding-top: 2%;
+  width: 20px;
 
 }
+
 ngb-pagination ::ng-deep ul > li:not(.active) > a {
   background-color: var(--background-color);
   color: var(--primary-color) !important;
@@ -88,7 +91,67 @@ ngb-pagination ::ng-deep ul > li.active > a {
   box-shadow: 0 0 0 0rem  transparent;
   background-color: var(--primary-color) !important;
 }
+@media (max-width:1429px){
+  .card-product{
+    margin:0 auto;
+  }
 
+
+}
+@media (max-width:1309px){
+.footer-pagination{
+  width: 600px;
+}
+.div-page-size{
+  margin-top: 0px !important;
+  margin-left: 2px !important;
+  padding-left: 250px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.span-page-size{
+  margin-right: 5px;
+}
+
+
+
+}
+@media (max-width:1200px){
+  .footer-pagination{
+    width: 590px;
+  }
+  .div-page-size{
+    padding-left: 240px !important;
+
+  }
+
+
+  }
+  @media (max-width:1141px){
+
+    .footer-pagination{
+      width: 520px;
+    }
+    .div-page-size{
+      padding-left: 200px !important;
+
+    }
+
+
+    }
+    @media (max-width:1075px){
+
+      .footer-pagination{
+        width: 450px;
+      }
+      .div-page-size{
+        padding-left: 180px !important;
+
+      }
+
+
+      }
 @media (max-width:991px){
 
 
@@ -96,11 +159,41 @@ ngb-pagination ::ng-deep ul > li.active > a {
      padding-top:50px;
      padding-bottom:100px
  }
+ .footer-pagination{
+  width: 600px;
 }
+.div-page-size{
+  padding-left: 250px !important;
+
+}
+
+}
+@media (max-width:991px){
+  .footer-pagination{
+    width: 500px;
+  }
+  .div-page-size{
+    padding-left: 200px !important;
+
+  }
+
+}
+
 @media (max-width:779px){
   .card-product{
     margin:0 auto;
   }
+  .footer-pagination{
+    width: 550px;
+    height: 80px;
+  }
+  .div-page-size{
+    padding-left: -0px !important;
+    margin-left: -37px !important;
+    margin-top: 80px !important;
+
+  }
+
 }
 @media (max-width:767px){
   .main-content.page-m{
@@ -109,6 +202,20 @@ ngb-pagination ::ng-deep ul > li.active > a {
 .product-box{
   text-align:centerg
 }
+.footer-pagination{
+  width: 100%;
+  height: 80px;
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+}
+.div-page-size{
+  padding-left: -0px !important;
+  margin-left: -0px !important;
+  margin-top: 8px !important;
+
+}
+
 }
 
 @media (max-width:699px){
