@@ -26,7 +26,7 @@ const routes: Routes = [
     component: ProductListComponent,
   },
   {
-    path: '*',
+    path: '**',
   component: Error404Component
   },
 ];
