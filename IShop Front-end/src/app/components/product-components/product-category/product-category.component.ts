@@ -5,7 +5,7 @@ import { ProductCategoryService } from 'src/app/services/product-category.servic
 @Component({
   selector: 'app-product-category',
   templateUrl: './product-category.component.html',
-  styleUrls: ['./product-category.component.css', '../sidenav/sidenav.component.css']
+  styleUrls: ['./product-category.component.css', '../../sidenav/sidenav.component.css']
 })
 export class ProductCategoryComponent {
   productCategory: ProductCategory[] = [];

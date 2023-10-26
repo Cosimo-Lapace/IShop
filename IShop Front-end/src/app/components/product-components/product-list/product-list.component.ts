@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css', '../header/header.component.css'],
+  styleUrls: ['./product-list.component.css', '../../page-components/header/header.component.css'],
 })
 export class ProductListComponent
   implements OnInit, AfterContentChecked, OnDestroy
