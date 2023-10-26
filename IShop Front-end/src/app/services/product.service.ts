@@ -30,12 +30,12 @@ export class ProductService {
   getProductById(id: number): Observable<Product> {
     return this.httpClient.get<Product>(`${this.baseUrlApi}/${id}`);
   }
-  searchProductByName(searchInput: string): Observable<Product[]> {
+  searchProductByName(page : number,pageSize:number,searchInput: string): Observable<GetResponse> {
     return this.httpClient
       .get<GetResponse>(
-        `${this.baseUrlApi}/search/findByNameContaining?name=${searchInput}`
+        `${this.baseUrlApi}/search/findByNameContaining?name=${searchInput}&page=${page}&size=${pageSize}`
       )
-      .pipe(map((response) => response._embedded.products));
+
   }
 }
 

@@ -18,7 +18,7 @@ export class ProductListComponent
   implements OnInit, AfterContentChecked, OnDestroy
 {
   products: Product[] = [];
-  IsServerOnline = true;
+  searchOk = true;
   currentCategoryId: number;
   searchMode: boolean = false;
   //paginate
@@ -39,9 +39,14 @@ export class ProductListComponent
   handleSearchProducts() {
     const searchInput: string = this.route.snapshot.paramMap.get('productname');
     this.productSerive
-      .searchProductByName(searchInput)
-      .subscribe((data) => (this.products = data),(error) =>{
-        this.IsServerOnline = false;
+      .searchProductByName(this.pageNumber - 1, this.pageSize,searchInput)
+      .subscribe((data) => {
+        (this.products = data._embedded.products),
+          (this.pageNumber = data.page.number + 1),
+          (this.pageSize = data.page.size);
+        this.totalElement = data.page.totalElements;
+      },(error) =>{
+        this.searchOk = false;
     });
   }
 
@@ -69,7 +74,7 @@ export class ProductListComponent
           (this.pageSize = data.page.size);
         this.totalElement = data.page.totalElements;
       },(error) =>{
-        this.IsServerOnline = false;
+        this.searchOk = false;
     });
     //end search by product-categoryId
   }
@@ -85,11 +90,20 @@ export class ProductListComponent
           (this.pageSize = data.page.size);
         this.totalElement = data.page.totalElements;
       },(error) =>{
-          this.IsServerOnline = false;
+          this.searchOk = false;
       }
       );
     // end get all product
   }
+
+  //pagination tag selected
+  selectedPagination(SelectedPagination :string){
+      this.pageSize = +SelectedPagination;
+      this.pageNumber = 1;
+      this.getProductList();
+
+  }
+  //end pagination tag selected
 
   //lifecycle
   ngOnInit(): void {
@@ -125,7 +139,6 @@ export class ProductListComponent
       }
     });
     //end fix
-
   }
 
   ngOnDestroy(): void {}

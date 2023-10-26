@@ -75,7 +75,19 @@ a.primary-btn:hover{
   padding-left: 15%;
   padding-right: 0%;
   padding-top: 2%;
+
   width: 20px;
+
+}
+select{
+  margin-top: -3px;
+
+  padding: 5px;
+
+}
+option{
+  background-color: #fdd9d8;
+  padding: 5px;
 
 }
 
