@@ -4,9 +4,11 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/model/cart-item';
 
 import { Product } from 'src/app/model/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -29,8 +31,8 @@ export class ProductListComponent
 
   constructor(
     private productSerive: ProductService,
+    private cartService : CartService,
     private route: ActivatedRoute,
-    private router: Router
   ) {}
   pageChange() {
     this.ngOnInit();
@@ -106,7 +108,8 @@ export class ProductListComponent
   //end pagination tag selected
   //Add To Cart
   addToCart(product : Product){
-    console.log(product)
+    const cartItem = new CartItem(product);
+    this.cartService.addToCart(cartItem);
   }
 
   //end Add to Cart
