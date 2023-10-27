@@ -51,7 +51,7 @@
   text-decoration: none;
   color: var(--button-color);
 }
-a.primary-btn{
+button.primary-btn{
   background:var(--button-color);
   padding:12px 23px;
   text-align:center;
@@ -62,7 +62,7 @@ a.primary-btn{
   margin-top:5px;
   text-decoration: none;
 }
-a.primary-btn:hover{
+button.primary-btn:hover{
   background:var(--button-color-hover);
   color:var(--background-color)
 }

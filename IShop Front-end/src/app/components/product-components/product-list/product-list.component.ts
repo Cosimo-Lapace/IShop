@@ -104,7 +104,12 @@ export class ProductListComponent
 
   }
   //end pagination tag selected
+  //Add To Cart
+  addToCart(product : Product){
+    console.log(product)
+  }
 
+  //end Add to Cart
   //lifecycle
   ngOnInit(): void {
     // check if params id not exist and id === 0 for external manage by user
