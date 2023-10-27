@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versione server:              8.0.34 - MySQL Community Server - GPL
+-- Versione server:              10.4.28-MariaDB - mariadb.org binary distribution
 -- S.O. server:                  Win64
 -- HeidiSQL Versione:            12.5.0.6677
 -- --------------------------------------------------------
@@ -16,14 +16,15 @@
 
 -- Dump della struttura di tabella ishop.product_category
 CREATE TABLE IF NOT EXISTS `product_category` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dump dei dati della tabella ishop.product_category: ~0 rows (circa)
+-- Dump dei dati della tabella ishop.product_category: ~2 rows (circa)
 INSERT INTO `product_category` (`id`, `category_name`) VALUES
-	(1, 'BOOKS');
+	(1, 'BOOKS'),
+	(2, 'COFFIE');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
