@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-components/product-list/product-list.component';
 import { Error404Component } from './error/error404/error404.component';
 import { ProductDetailComponent } from './components/product-components/product-detail/product-detail.component';
+import { CartDetailComponent } from './components/cart-components/cart-detail/cart-detail.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'category',
     component: ProductListComponent,
+  },
+  {
+    path:'cart/detail',
+    component:CartDetailComponent
   },
   {
     path: '',
