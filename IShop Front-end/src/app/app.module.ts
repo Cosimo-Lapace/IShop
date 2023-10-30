@@ -17,6 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './utilities/spinner/spinner.component';
 import { CartStatusComponent } from './components/page-components/cart-status/cart-status.component';
 import { CartDetailComponent } from './components/cart-components/cart-detail/cart-detail.component';
+import { ButtonComponent } from './utilities/button/button.component';
+import { BackToProductListComponent } from './utilities/back-to-product-list/back-to-product-list.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { CartDetailComponent } from './components/cart-components/cart-detail/ca
     ProductNotFoundComponent,
     CartStatusComponent,
     CartDetailComponent,
+    ButtonComponent,
+    BackToProductListComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [],

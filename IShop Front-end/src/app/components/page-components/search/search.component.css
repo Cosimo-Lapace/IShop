@@ -24,20 +24,7 @@ input.au-input.au-input-xl{
   border-radius:40px!important;
   margin-right:15px
 }
-.au-btn-submit{
-  position:relative;
-  right:0;
-  min-width:95px;
-  color:#fff;
-  border:1px solid var(--border-color);
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:43px;
-  background: var(--button-color)
-}
-.au-btn-submit:hover{
-  background:var(--button-color-hover)
-}
+
 @media (max-width:1600px){
   .au-input-xl{
     min-width:290px
@@ -73,16 +60,15 @@ input.au-input.au-input-xl{
 .au-input-xl{
   min-width:150px
 }
-.au-btn-submit{
-  position:relative;
-  right:10px;
-  min-width:85px;
-  color:#fff;
-  border:1px solid var(--border-color);
-  -webkit-border-radius:3px;
-  -moz-border-radius:3px;
-  border-radius:0;
-  background: var(--button-color);
+@media (max-width:671px){
+  .au-input{
+    width: 450px !important;
+  }
+}
+@media (max-width:624px){
+  .au-input{
+    width: 400px !important;
+  }
 }
 }
 @media (max-width:600px){
@@ -90,11 +76,42 @@ input.au-input.au-input-xl{
     width: 300px !important;
   }
 }
+@media (max-width:470px){
+  .au-input{
+    width: 250px !important;
+  }
+}
+@media (max-width:416px){
+  .au-input{
+    width: 230px !important;
+  }
+}
+@media (max-width:394px){
+  .au-input{
+    width: 210px !important;
+  }
+}
 @media (max-width:390px){
   .au-input{
     width: 200px !important;
   }
 }
+@media (max-width:365px){
+  .au-input{
+    width: 180px !important;
+  }
+}
+@media (max-width:340px){
+  .au-input{
+    width: 160px !important;
+  }
+}
+@media (max-width:320px){
+  .au-input{
+    width: 140px !important;
+  }
+}
+
 @media (max-width:300px){
   .au-input{
     width: 100px !important;

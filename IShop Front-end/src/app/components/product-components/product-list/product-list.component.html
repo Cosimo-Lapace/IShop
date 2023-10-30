@@ -28,8 +28,7 @@
             <div class="price">
               {{ product.unitPrice | currency : "EUR" : true }}
             </div>
-
-            <button type="button" (click)="addToCart(product)" class="primary-btn">Add to cart</button>
+            <app-button (click)="addToCart(product)" [buttonText]="'Add To Cart'"></app-button>
           </div>
         </div>
       </div>

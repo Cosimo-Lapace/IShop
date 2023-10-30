@@ -51,21 +51,7 @@
   text-decoration: none;
   color: var(--button-color);
 }
-button.primary-btn{
-  background:var(--button-color);
-  padding:12px 23px;
-  text-align:center;
-  display:inline-block;
-  color:var(--background-color);
-  border-radius:43px;
-  font-size:14px;
-  margin-top:5px;
-  text-decoration: none;
-}
-button.primary-btn:hover{
-  background:var(--button-color-hover);
-  color:var(--background-color)
-}
+
 .price{
   margin:15px 0 0;
   font-weight:800;

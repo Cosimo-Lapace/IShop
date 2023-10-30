@@ -1,0 +1,43 @@
+.primary-btn{
+  background:var(--button-color);
+  padding:12px 23px;
+  text-align:center;
+  display:inline-block;
+  color:var(--background-color);
+  border-radius:43px;
+  font-size:14px;
+  margin-top:5px;
+  text-decoration: none;
+}
+.primary-btn:hover{
+  background:var(--button-color-hover);
+  color:var(--background-color)
+}
+.au-btn-submit{
+  position:relative;
+  right:0;
+  min-width:95px;
+  height: 100%;
+  color:#fff;
+  border:1px solid var(--border-color);
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:43px;
+  background: var(--button-color)
+}
+.au-btn-submit:hover{
+  background:var(--button-color-hover)
+}
+@media (max-width:767px){
+  .au-btn-submit{
+    position:relative;
+    right:10px;
+    min-width:85px;
+    color:#fff;
+    border:1px solid var(--border-color);
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:0;
+    background: var(--button-color);
+  }
+}

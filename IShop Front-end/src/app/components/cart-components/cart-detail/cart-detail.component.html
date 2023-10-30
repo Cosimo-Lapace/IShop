@@ -2,6 +2,7 @@
 <div class="main-content desktop-mode">
   <div class="section-content section-content-p30">
     <div class="container-fluid">
+      <app-back-to-product-list></app-back-to-product-list>
       <table class="table table-bordered">
         <tr>
           <th class="product-image-title">Product Image</th>
@@ -41,9 +42,7 @@
             <b>Total Quantity:2</b>
             <p>Shipping FREE</p>
             <b>Total Price: $19.99</b><br />
-            <button href="checkout-page.html" class="primary-btn">
-              Checkout
-            </button>
+            <app-button [buttonText]="'Checkout'"></app-button>
           </td>
         </tr>
       </table>
@@ -55,6 +54,7 @@
 <div class="main-content mobile-mode">
   <div class="section-content section-content-p30">
     <div class="container-fluid">
+      <app-back-to-product-list></app-back-to-product-list>
       <table class="table table-bordered">
         <tr>
           <th class="product-detail-title-mobile">Product Detail</th>
@@ -98,9 +98,9 @@
             <p><b>Total Quantity:2</b></p>
             <p><b>Shipping FREE </b></p>
             <b>Total Price: $19.99</b><br />
-            <button href="checkout-page.html" class="primary-btn">
-              Checkout
-            </button>
+            <app-button [buttonText]="'Checkout'"></app-button>
+
+
           </td>
         </tr>
       </table>

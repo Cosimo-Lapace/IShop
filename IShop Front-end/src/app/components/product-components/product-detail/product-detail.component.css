@@ -6,21 +6,7 @@
 .main-content.page-m{
   padding:10% 15%!important
 }
-button.primary-btn{
-  background:var(--button-color);
-  padding:12px 23px;
-  text-align:center;
-  display:inline-block;
-  color:var(--background-color);
-  border-radius:43px;
-  font-size:14px;
-  margin-top:5px;
-  text-decoration: none;
-}
-button.primary-btn:hover{
-  background:var(--button-color-hover);
-  color:var(--background-color)
-}
+
 
 .section-content{
   position:relative;
@@ -38,15 +24,7 @@ button.primary-btn:hover{
   font-weight:800;
   color:var(--button-color)
 }
-.back{
-  color:#555;
-  font-size:16px;
-  padding:5px 0;
-  text-decoration: none;
-}
-.back:hover{
-  color:var(--primary-color)
-}
+
 @media (max-width:1315px) and (min-width:992px){
  .section-content{
       padding:0 15px

@@ -1,0 +1,9 @@
+.back{
+  color:#555;
+  font-size:16px;
+  padding:5px 0;
+  text-decoration: none;
+}
+.back:hover{
+  color:var(--primary-color)
+}

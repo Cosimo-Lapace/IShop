@@ -13,16 +13,13 @@
           <div class="price">
             {{ product.unitPrice | currency : "EUR" : true }}
           </div>
-          <button (click)="addToCart()" type="button" class="primary-btn">Add to cart</button>
+          <app-button (click)="addToCart()" [buttonText]="'Add To Cart'"></app-button>
 
           <h4>Product Description</h4>
           <p>{{ product.description }}</p>
           <p>{{product.dataCreated | date :'dd'+'/'+'MM'+'/'+'yyyy' }}</p>
-
-          <a routerLink="/" class="back">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back to Product List</a
-          >
+            <app-back-to-product-list></app-back-to-product-list>
+        
         </div>
       </div>
     </div>
