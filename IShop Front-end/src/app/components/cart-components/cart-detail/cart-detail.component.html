@@ -3,49 +3,70 @@
   <div class="section-content section-content-p30">
     <div class="container-fluid">
       <app-back-to-product-list></app-back-to-product-list>
-      <table class="table table-bordered">
+      <table
+        class="table table-bordered"
+        *ngIf="cartItems.length !== 0; else cartItemsEmpty"
+      >
         <tr>
           <th class="product-image-title">Product Image</th>
           <th class="product-detail-title">Product Detail</th>
           <th class="product-empy-title"></th>
         </tr>
-        <tr>
+        <tr *ngFor="let cartItem of cartItems">
           <td>
             <img
-              src="../../../../assets/images/products/il vampiro di venezia.jpg"
+              src="{{ cartItem.imageUrl }}"
+              alt="{{ cartItem.imageUrl }}"
               class="img-responsive"
               width="180px"
             />
           </td>
           <td>
-            <p>Product title</p>
-            <p>Product subtitle title</p>
-            <p>$9.99</p>
+            <p>{{ cartItem.name }}</p>
+            <p>{{ cartItem.unitPrice | currency : "EUR" : true }}</p>
           </td>
           <td class="pb-2 ps-1">
             <div class="items">
-              <label>Quantity</label>
-              <select>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-              </select>
+              <span class="me-1">Quantity: </span>
+              <button
+                class="fa-solid fa-minus icons-quantity"
+                (click)="decreases(cartItem)"
+              ></button>
+              <span class="quantity"> {{ cartItem.quantity }} </span>
+              <button
+                class="fa-solid fa-plus icons-quantity"
+                (click)="increase(cartItem)"
+              ></button>
+           
             </div>
-            <p>Sub-total $9.99</p>
+            <span class="error-quantity" *ngIf="cartQuantityError">
+              The quantity cannot be zero</span
+            >
+            <p>
+              Sub-total
+              {{
+                cartItem.quantity * cartItem.unitPrice | currency : "EUR" : true
+              }}
+            </p>
             <button href="#" class="primary-btn">Remove</button>
           </td>
         </tr>
         <tr>
           <td colspan="2"></td>
           <td class="pb-2 ps-1 pt-2">
-            <b>Total Quantity:2</b>
+            <b>Total Quantity : {{ totalQuantity }}</b>
             <p>Shipping FREE</p>
-            <b>Total Price: $19.99</b><br />
+            <b>Total Price: {{ totalPrice | currency : "EUR" : true }}</b
+            ><br />
             <app-button [buttonText]="'Checkout'"></app-button>
           </td>
         </tr>
       </table>
+      <ng-template #cartItemsEmpty>
+        <div class="w-100 text-center">
+          <h3>The cart is empty</h3>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>
@@ -99,8 +120,6 @@
             <p><b>Shipping FREE </b></p>
             <b>Total Price: $19.99</b><br />
             <app-button [buttonText]="'Checkout'"></app-button>
-
-
           </td>
         </tr>
       </table>

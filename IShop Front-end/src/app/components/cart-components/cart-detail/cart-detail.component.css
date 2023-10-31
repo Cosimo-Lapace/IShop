@@ -38,6 +38,27 @@ table.table.table-bordered th{
 .product-empy-title{
   width: 30%;
 }
+.quantity{
+  padding: 5px;
+  font-weight: 500;
+}
+.icons-quantity{
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: 0.35rem;
+  padding: 5px;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+
+}
+.icons-quantity:hover{
+  background-color: var(--primary-color);
+  color: var(--background-color);
+  transition: 0.1s all;
+}
+.error-quantity{
+  color: var(--primary-color);
+}
+
 @media (max-width:541px){
 .desktop-mode{
   display: none;

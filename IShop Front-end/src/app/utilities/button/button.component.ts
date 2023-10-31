@@ -6,7 +6,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
   styleUrls: ['./button.component.css']
 })
 export class ButtonComponent implements OnInit {
-  @ViewChild('button', { static: true }) button: ElementRef;
+  @ViewChild('button', { static: true }) button: ElementRef<ButtonComponent>;
   @Input() buttonText: string;
   constructor(private render: Renderer2){}
   ngOnInit(): void {
