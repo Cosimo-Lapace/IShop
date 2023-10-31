@@ -37,9 +37,9 @@
                 class="fa-solid fa-plus icons-quantity"
                 (click)="increase(cartItem)"
               ></button>
-           
+
             </div>
-            <span class="error-quantity" *ngIf="cartQuantityError">
+            <span class="error-quantity" *ngIf="cartItem.cartQuantityError">
               The quantity cannot be zero</span
             >
             <p>
@@ -48,7 +48,7 @@
                 cartItem.quantity * cartItem.unitPrice | currency : "EUR" : true
               }}
             </p>
-            <button href="#" class="primary-btn">Remove</button>
+            <app-button [buttonText]="'Remove'"></app-button>
           </td>
         </tr>
         <tr>

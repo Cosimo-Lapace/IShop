@@ -9,7 +9,6 @@ export class CartService {
   cartItems: CartItem[] = [];
   totalPrice: Subject<number> = new Subject<number>();
   totalQuantity: Subject<number> = new Subject<number>();
-  cartQuantityError :Subject<boolean> = new Subject<boolean>();
 
   constructor() {}
   checkQuantity(cartItem:CartItem){
@@ -20,9 +19,9 @@ export class CartService {
     }else{
       cartError = false;
     }
-    this.cartQuantityError.next(cartError);
+    cartItem.cartQuantityError = cartError;
   }
-  
+
   longCartData(totalPriceValue: number, totalQuantityValue: number) {
     for (let cartIte of this.cartItems) {
       const subTotalPrice = cartIte.quantity * cartIte.unitPrice;

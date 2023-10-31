@@ -11,7 +11,6 @@ export class CartDetailComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity:number = 0;
-  cartQuantityError: boolean = false;
 
 
   constructor(private cartService:CartService){}
@@ -20,7 +19,6 @@ export class CartDetailComponent implements OnInit {
     this.cartItems = this.cartService.cartItems;
     this.cartService.totalPrice.subscribe(data => this.totalPrice = data);
     this.cartService.totalQuantity.subscribe(data => this.totalQuantity = data);
-    this.cartService.cartQuantityError.subscribe(data => this.cartQuantityError = data);
 
     this.cartService.cartTotals()
 
@@ -28,11 +26,9 @@ export class CartDetailComponent implements OnInit {
   }
   increase(cartItem : CartItem){
     this.cartService.addToCart(cartItem);
-    console.log(this.cartQuantityError)
   }
   decreases(cartItem: CartItem){
     this.cartService.decreaseCart(cartItem);
-    console.log(this.cartQuantityError)
 
   }
   ngOnInit(): void {

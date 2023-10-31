@@ -23,4 +23,5 @@ export class CartStatusComponent implements OnInit {
   ngOnInit(): void {
    this.updateCartStatus();
   }
+
 }
