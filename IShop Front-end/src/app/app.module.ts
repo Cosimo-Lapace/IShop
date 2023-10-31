@@ -19,6 +19,7 @@ import { CartStatusComponent } from './components/page-components/cart-status/ca
 import { CartDetailComponent } from './components/cart-components/cart-detail/cart-detail.component';
 import { ButtonComponent } from './utilities/button/button.component';
 import { BackToProductListComponent } from './utilities/back-to-product-list/back-to-product-list.component';
+import { CartDetailMobileComponent } from './components/cart-components/cart-detail-mobile/cart-detail-mobile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BackToProductListComponent } from './utilities/back-to-product-list/bac
     CartDetailComponent,
     ButtonComponent,
     BackToProductListComponent,
+    CartDetailMobileComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [],

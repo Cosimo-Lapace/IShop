@@ -1,0 +1,74 @@
+<!-- MOBILE MODE -->
+<div class="main-content mobile-mode" [ngClass]="{'spacing-mobile-mode':cartItems.length === 0 || cartItems.length === 1}">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <app-back-to-product-list></app-back-to-product-list>
+      <table class="table table-bordered" *ngIf="cartItems.length !== 0; else cartItemsEmpty">
+        <tr>
+          <th class="product-detail-title-mobile">Product Detail</th>
+        </tr>
+        <tr *ngFor="let cartItem of cartItems">
+          <td class="product-detail-title-body">
+            <div class="row">
+              <div class="col-md-6">
+                <img
+                src="{{ cartItem.imageUrl }}"
+                alt="{{ cartItem.imageUrl }}"
+                  class="img-responsive"
+                  width="180px"
+                />
+              </div>
+              <div class="col-md-6">
+                <p>{{ cartItem.name }}</p>
+                <p>{{ cartItem.unitPrice | currency : "EUR" : true }}</p>
+                <div class="items">
+                  <span class="me-1">Quantity: </span>
+                  <button
+                    class="fa-solid fa-minus icons-quantity"
+                    (click)="decreases(cartItem)"
+                  ></button>
+                  <span class="quantity"> {{ cartItem.quantity }} </span>
+                  <button
+                    class="fa-solid fa-plus icons-quantity"
+                    (click)="increase(cartItem)"
+                  ></button>
+
+                </div>
+                <span class="error-quantity" *ngIf="cartItem.cartQuantityError">
+                  The quantity cannot be zero</span
+                >
+                <p>
+                  Sub-total
+                  {{
+                    cartItem.quantity * cartItem.unitPrice | currency : "EUR" : true
+                  }}
+                </p>
+                <app-button [buttonText]="'Remove'"></app-button>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table class="table table-bordered text-center"  *ngIf="cartItems.length !== 0">
+        <tr>
+          <th class="product-empy-title-mobile">Checkout</th>
+        </tr>
+        <tr>
+          <td>
+            <p><b>Total Quantity : {{ totalQuantity }}</b></p>
+            <p><b>Shipping FREE </b></p>
+            <b>Total Price: {{ totalPrice | currency : "EUR" : true }}</b>
+            <br />
+            <app-button [buttonText]="'Checkout'"></app-button>
+          </td>
+        </tr>
+      </table>
+      <ng-template #cartItemsEmpty>
+        <div class="w-100 text-center">
+          <h3>The cart is empty</h3>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<!-- END MOBILE MODE -->
