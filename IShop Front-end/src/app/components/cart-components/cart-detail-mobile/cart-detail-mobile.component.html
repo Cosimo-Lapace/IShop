@@ -22,7 +22,7 @@
                 <p>{{ cartItem.name }}</p>
                 <p>{{ cartItem.unitPrice | currency : "EUR" : true }}</p>
                 <div class="items">
-                  <span class="me-1">Quantity: </span>
+                  <span class="me-1 quantity-title">Quantity : </span>
                   <button
                     class="fa-solid fa-minus icons-quantity"
                     (click)="decreases(cartItem)"

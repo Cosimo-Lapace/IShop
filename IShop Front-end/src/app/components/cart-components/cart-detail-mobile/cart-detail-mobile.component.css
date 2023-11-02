@@ -1,3 +1,9 @@
 .spacing-mobile-mode{
   height: 90vh !important;
 }
+
+@media (max-width:414px){
+  .quantity-title{
+    display: block;
+  }
+}

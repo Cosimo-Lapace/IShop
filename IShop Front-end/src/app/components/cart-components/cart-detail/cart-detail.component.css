@@ -58,7 +58,11 @@ table.table.table-bordered th{
 .error-quantity{
   color: var(--primary-color);
 }
-
+@media (max-width:594px){
+  .quantity-title{
+    display: block;
+  }
+}
 @media (max-width:541px){
 .desktop-mode{
   display: none;
