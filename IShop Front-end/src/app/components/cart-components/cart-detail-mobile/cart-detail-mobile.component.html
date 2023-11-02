@@ -43,7 +43,7 @@
                     cartItem.quantity * cartItem.unitPrice | currency : "EUR" : true
                   }}
                 </p>
-                <app-button [buttonText]="'Remove'"></app-button>
+                <app-button (click)="remove(cartItem)" [buttonText]="'Remove'"></app-button>
               </div>
             </div>
           </td>
@@ -60,6 +60,7 @@
             <b>Total Price: {{ totalPrice | currency : "EUR" : true }}</b>
             <br />
             <app-button [buttonText]="'Checkout'"></app-button>
+            <app-button (click)="removeAllCart()" [buttonText]="'Cancel'"></app-button>
           </td>
         </tr>
       </table>

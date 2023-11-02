@@ -1,16 +1,32 @@
-.primary-btn{
-  background:var(--button-color);
+.primary-btn,.primary-btn-success,.cancel-btn{
   padding:12px 23px;
   text-align:center;
   display:inline-block;
-  color:var(--background-color);
   border-radius:43px;
   font-size:14px;
   margin-top:5px;
   text-decoration: none;
 }
+.primary-btn{
+  background:var(--button-color);
+  color:var(--background-color);
+  transition: 1s all;
+}
 .primary-btn:hover{
   background:var(--button-color-hover);
+  color:var(--background-color)
+}
+.primary-btn-success{
+  background: var(--button-color-success);
+  color: var(--background-color);
+  transition: 0.4s all;
+}
+.cancel-btn{
+  background:var(--primary-color);
+  color:var(--background-color);
+}
+.cancel-btn:hover{
+  background:var(--button-color-cancel-hover);
   color:var(--background-color)
 }
 .au-btn-submit{
@@ -27,6 +43,12 @@
 }
 .au-btn-submit:hover{
   background:var(--button-color-hover)
+}
+.button-remove{
+color: var(--primary-color);
+}
+.button-remove:hover{
+  text-decoration: underline;
 }
 @media (max-width:767px){
   .au-btn-submit{

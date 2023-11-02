@@ -21,5 +21,11 @@ export class CartDetailMobileComponent {
     this.cartService.decreaseCart(cartItem);
 
   }
+  remove(cartItem:CartItem){
+    this.cartService.removeCart(cartItem);
+  }
+  removeAllCart(){
+    this.cartService.removeAllCart();
+  }
 
 }

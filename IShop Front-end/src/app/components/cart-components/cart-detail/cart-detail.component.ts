@@ -31,6 +31,12 @@ export class CartDetailComponent implements OnInit {
     this.cartService.decreaseCart(cartItem);
 
   }
+  remove(cartItem:CartItem){
+    this.cartService.removeCart(cartItem);
+  }
+  removeAllCart(){
+    this.cartService.removeAllCart();
+  }
   ngOnInit(): void {
     this.listCartDetail()
   }

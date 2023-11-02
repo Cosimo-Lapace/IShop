@@ -11,53 +11,6 @@ export class CartService {
   totalQuantity: Subject<number> = new Subject<number>();
 
   constructor() {}
-  checkQuantity(cartItem:CartItem){
-    let cartError : boolean = false
-    if(cartItem.quantity === 0){
-      cartItem.quantity = 1;
-      cartError = true;
-    }else{
-      cartError = false;
-    }
-    cartItem.cartQuantityError = cartError;
-  }
-
-  longCartData(totalPriceValue: number, totalQuantityValue: number) {
-    for (let cartIte of this.cartItems) {
-      const subTotalPrice = cartIte.quantity * cartIte.unitPrice;
-      console.log(
-        'name ' +
-          cartIte.name +
-          ' quantity ' +
-          cartIte.quantity +
-          ' price ' +
-          'price' +
-          cartIte.unitPrice +
-          ' total ' +
-          subTotalPrice
-      );
-    }
-    console.log("total price " + totalPriceValue.toFixed(2) + " total quantity " + totalQuantityValue);
-    console.log("----------------------------------------------------------")
-  }
-
-  //calcolate cart total price and total quantity
-  cartTotals() {
-    let totalPriceValue: number = 0;
-    let totalQuantityValue: number = 0;
-    //cycle items
-    for (let cartIte of this.cartItems) {
-      //total price =  item quantity in the cart x price
-      totalPriceValue += cartIte.quantity * cartIte.unitPrice;
-      //total quantity = sum item quantity
-      totalQuantityValue += cartIte.quantity;
-    }
-    //send in my component
-    this.totalPrice.next(totalPriceValue);
-    this.totalQuantity.next(totalQuantityValue);
-
-    this.longCartData(totalPriceValue, totalQuantityValue);
-  }
 
   addToCart(cartItem: CartItem) {
     //control item Exists
@@ -91,4 +44,45 @@ export class CartService {
     this.checkQuantity(cartItem)
     this.cartTotals();
   }
+
+  removeCart(cartItem:CartItem){
+   let cartIndex = this.cartItems.findIndex(cartIte => cartIte.id === cartItem.id);
+   this.cartItems.splice(cartIndex , 1)
+   this.cartTotals()
+  }
+  removeAllCart(){
+    this.cartItems.splice(0,this.cartItems.length)
+    this.cartTotals()
+  }
+    //calcolate cart total price and total quantity
+    cartTotals() {
+      let totalPriceValue: number = 0;
+      let totalQuantityValue: number = 0;
+      //cycle items
+      for (let cartIte of this.cartItems) {
+        //total price =  item quantity in the cart x price
+        totalPriceValue += cartIte.quantity * cartIte.unitPrice;
+        //total quantity = sum item quantity
+        totalQuantityValue += cartIte.quantity;
+      }
+      //send in my component
+      this.totalPrice.next(totalPriceValue);
+      this.totalQuantity.next(totalQuantityValue);
+    }
+
+  checkQuantity(cartItem:CartItem){
+    let cartError : boolean = false
+    if(cartItem.quantity === 0 || cartItem.quantity < 0){
+      cartItem.quantity = 1;
+      cartError = true;
+    }else{
+      cartError = false;
+    }
+    cartItem.cartQuantityError = cartError;
+  }
+
+
+
+
+
 }
