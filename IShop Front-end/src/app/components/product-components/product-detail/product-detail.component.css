@@ -8,28 +8,14 @@
 }
 
 
-.section-content{
-  position:relative;
-  margin:0 auto;
-  z-index:1
-}
-.section-content-p30{
-  padding:0 30px
-}
-.section-content.section-content-p30{
-  padding-top:100px
-}
+
 .price{
   margin:15px 0 0;
   font-weight:800;
   color:var(--button-color)
 }
 
-@media (max-width:1315px) and (min-width:992px){
- .section-content{
-      padding:0 15px
-  }
-}
+
 @media (max-width:991px){
 
   .section-content{

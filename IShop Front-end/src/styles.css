@@ -106,3 +106,41 @@ a,a:hover{
   -moz-transition:all .3s ease;
   transition:all .3s ease
 }
+.main-content{
+  padding-top:30px;
+  min-height:100vh;
+  background:var(--background-color);
+}
+.main-content.page-m{
+  padding:10% 15%!important
+}
+.section-content{
+  position:relative;
+  margin:0 auto;
+  z-index:1
+}
+.section-content-p30{
+  padding:0 30px
+}
+.section-content.section-content-p30{
+  padding-top:100px
+}
+@media (max-width:1315px) and (min-width:992px){
+  .section-content{
+       padding:0 15px
+   }
+ }
+@media (max-width:991px){
+
+
+  .main-content{
+     padding-top:50px;
+     padding-bottom:100px
+ }
+
+}
+@media (max-width:767px){
+  .main-content.page-m{
+    padding:10% 0!important
+}
+}

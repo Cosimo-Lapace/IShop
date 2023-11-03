@@ -20,6 +20,7 @@ import { CartDetailComponent } from './components/cart-components/cart-detail/ca
 import { ButtonComponent } from './utilities/button/button.component';
 import { BackToProductListComponent } from './utilities/back-to-product-list/back-to-product-list.component';
 import { CartDetailMobileComponent } from './components/cart-components/cart-detail-mobile/cart-detail-mobile.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CartDetailMobileComponent } from './components/cart-components/cart-det
     ButtonComponent,
     BackToProductListComponent,
     CartDetailMobileComponent,
+    CheckoutComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
   providers: [],

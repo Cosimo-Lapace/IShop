@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../model/cart-item';
-import { Subject } from 'rxjs';
+import {Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,7 @@ export class CartService {
     else {
       this.cartItems.push(cartItem);
     }
-
+/*     localStorage.setItem('cartItems', JSON.stringify(this.cartItems)); */
   this.checkQuantity(cartItem)
     //check total cart
     this.cartTotals();
@@ -58,6 +58,13 @@ export class CartService {
     cartTotals() {
       let totalPriceValue: number = 0;
       let totalQuantityValue: number = 0;
+      /* if(localStorage.getItem("totalPrice")){
+        totalPriceValue = +localStorage.getItem("totalPrice");
+      }
+      if(localStorage.getItem("totalQuantity")){
+        totalQuantityValue = +localStorage.getItem("totalQuantity")
+      } */
+
       //cycle items
       for (let cartIte of this.cartItems) {
         //total price =  item quantity in the cart x price
@@ -65,9 +72,14 @@ export class CartService {
         //total quantity = sum item quantity
         totalQuantityValue += cartIte.quantity;
       }
+
+
       //send in my component
+
+
       this.totalPrice.next(totalPriceValue);
       this.totalQuantity.next(totalQuantityValue);
+
     }
 
   checkQuantity(cartItem:CartItem){

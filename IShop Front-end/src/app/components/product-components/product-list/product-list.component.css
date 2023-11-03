@@ -1,12 +1,5 @@
 
-.main-content{
-  padding-top:30px;
-  min-height:100vh;
-  background:var(--background-color);
-}
-.main-content.page-m{
-  padding:10% 15%!important
-}
+
 .product-box img {
   width: 150px;
   height: 200px;
@@ -152,11 +145,6 @@ ngb-pagination ::ng-deep ul > li.active > a {
       }
 @media (max-width:991px){
 
-
-  .main-content{
-     padding-top:50px;
-     padding-bottom:100px
- }
  .footer-pagination{
   width: 600px;
 }
@@ -194,9 +182,8 @@ ngb-pagination ::ng-deep ul > li.active > a {
 
 }
 @media (max-width:767px){
-  .main-content.page-m{
-    padding:10% 0!important
-}
+
+
 .product-box{
   text-align:centerg
 }

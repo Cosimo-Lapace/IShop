@@ -59,7 +59,7 @@
             <p><b>Shipping FREE </b></p>
             <b>Total Price: {{ totalPrice | currency : "EUR" : true }}</b>
             <br />
-            <app-button [buttonText]="'Checkout'"></app-button>
+            <app-button routerLink="/checkout" [buttonText]="'Checkout'"></app-button>
             <app-button (click)="removeAllCart()" [buttonText]="'Cancel'"></app-button>
           </td>
         </tr>
