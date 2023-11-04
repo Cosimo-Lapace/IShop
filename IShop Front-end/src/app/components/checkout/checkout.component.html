@@ -3,51 +3,52 @@
 <div class="main-content page-m">
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
-
-      <div class="form-area">
+      <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
+      <div class="form-area" formGroupName="customer">
         <h3>Customer</h3>
         <div class="row">
           <div class="col-md-6">
             <div class="input-space">
-              <input type="text" placeholder="First Name">
+              <input type="text" placeholder="First Name" formControlName="firstName" >
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-space">
-              <input type="text" placeholder="Last Name">
+              <input type="text" placeholder="Last Name" formControlName="lastName">
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-space">
-              <input type="text" placeholder="Email Address">
+              <input type="text" placeholder="Email Address" formControlName="email">
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-space">
-              <input type="text" placeholder="Confirm Email Address">
+              <input type="text" [ngClass]="{'error-email-input':isNotEmailEqual}" placeholder="Confirm Email Address" formControlName="confirmEmail">
+              <div class="text-center error-email" *ngIf="isNotEmailEqual">Emails are not created equal</div>
             </div>
+
           </div>
         </div>
       </div>
-
       <!--Form 2-->
-      <div class="form-area">
+      <div class="form-area" formGroupName="shippingAddress">
         <h3>Shipping Address</h3>
         <div class="row">
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Street">
+              <input type="text" placeholder="Street" formControlName="street">
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="City">
+              <input type="text" placeholder="City" formControlName="city">
             </div>
           </div>
 
           <div class="col-md-12">
             <div class="input-space">
-              <select>
+              <select formControlName="state">
                 <option>State / Province</option>
                 <option></option>
                 <option></option>
@@ -58,24 +59,59 @@
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Zip Code / Postal Code">
+              <input type="text" placeholder="Zip Code / Postal Code" formControlName="postalCode">
             </div>
           </div>
         </div>
       </div>
       <div class="input-space">
         <label class="au-checkbox">
-          <input type="checkbox" checked="checked">
+          <input type="checkbox" checked="checked" (change)="billingAddress($event)">
           <span class="au-checkmark"></span> Bill Address same as Shipping Adress
         </label>
+
+      </div>
+      <!-- billing Address -->
+      <div class="form-area" formGroupName="billingAddress" *ngIf="isBillingAddress">
+        <h3>Billing Address</h3>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="input-space">
+              <input type="text" placeholder="Street" formControlName="street">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="input-space">
+              <input type="text" placeholder="City" formControlName="city">
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="input-space">
+              <select formControlName="state">
+                <option>State / Province</option>
+                <option></option>
+                <option></option>
+                <option></option>
+                <option></option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="input-space">
+              <input type="text" placeholder="Zip Code / Postal Code" formControlName="postalCode">
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="form-area">
+<!-- END billing Address -->
+      <div class="form-area" formGroupName="creditCard">
         <h3>Credit Card</h3>
         <div class="row">
           <div class="col-md-12">
             <div class="input-space">
-              <select>
+              <select formControlName="cardType" >
                 <option>Visa</option>
                 <option></option>
                 <option></option>
@@ -86,18 +122,18 @@
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Name on card">
+              <input type="text" placeholder="Name on card" formControlName="cardName">
             </div>
           </div>
           <div class="clearfix"></div>
           <div class="col-md-8">
             <div class="input-space">
-              <input type="text" placeholder="Card number">
+              <input type="text" placeholder="Card number" formControlName="cardNumber" >
             </div>
           </div>
           <div class="col-md-4">
             <div class="input-space">
-              <input type="text" placeholder="CVV2 number">
+              <input type="text" placeholder="CVV2 number" formControlName="cardSecutityCode" >
             </div>
           </div>
           <div class="clearfix"></div>
@@ -105,7 +141,7 @@
           <div class="col-md-2"> <label class="date">Expiration Date</label></div>
           <div class="col-md-5">
             <div class="input-space">
-              <select>
+              <select formControlName="cardSecutityMonth">
                 <option>Month</option>
                 <option></option>
                 <option></option>
@@ -116,7 +152,7 @@
           </div>
           <div class="col-md-5">
             <div class="input-space">
-              <select>
+              <select formControlName="cardSecutityYear">
                 <option>Year</option>
                 <option></option>
                 <option></option>
@@ -141,8 +177,9 @@
         </div>
       </div>
       <div class="text-center">
-        <button class="btn btn-info">Purchase</button>
+        <button type="submit"  class="btn btn-info">Purchase</button>
       </div>
+    </form>
     </div>
   </div>
 </div>

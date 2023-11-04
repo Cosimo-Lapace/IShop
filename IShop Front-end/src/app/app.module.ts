@@ -21,6 +21,7 @@ import { ButtonComponent } from './utilities/button/button.component';
 import { BackToProductListComponent } from './utilities/back-to-product-list/back-to-product-list.component';
 import { CartDetailMobileComponent } from './components/cart-components/cart-detail-mobile/cart-detail-mobile.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartDetailMobileComponent,
     CheckoutComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule,ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
