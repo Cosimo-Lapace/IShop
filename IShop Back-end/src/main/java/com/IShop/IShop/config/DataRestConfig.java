@@ -1,7 +1,9 @@
 package com.IShop.IShop.config;
 
+import com.IShop.IShop.entity.Country;
 import com.IShop.IShop.entity.Product;
 import com.IShop.IShop.entity.ProductCategory;
+import com.IShop.IShop.entity.State;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +33,19 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         //credo un array di metodi http
         HttpMethod[] httpMethodsImport = {HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.POST};
         //disabilito i seguenti metodi di Product class
-        config.getExposureConfiguration().forDomainType(Product.class)
-                .withItemExposure((data, httpMethods) -> httpMethods.disable(httpMethodsImport))
-                .withCollectionExposure((data, httpMethods) -> httpMethods.disable(httpMethodsImport));
-
+        disabledClassHttpMethod(Product.class,config, httpMethodsImport);
         //disabilito i seguenti metodi di ProductCategory class
-        config.getExposureConfiguration().forDomainType(ProductCategory.class)
+        disabledClassHttpMethod(ProductCategory.class,config, httpMethodsImport);
+        //disable method in Country class
+        disabledClassHttpMethod(Country.class,config, httpMethodsImport);
+        //disable method in State class
+        disabledClassHttpMethod(State.class,config, httpMethodsImport);
+    }
+
+    private static void disabledClassHttpMethod(Class theclass,RepositoryRestConfiguration config, HttpMethod[] httpMethodsImport) {
+        config.getExposureConfiguration().forDomainType(theclass)
                 .withItemExposure((data, httpMethods) -> httpMethods.disable(httpMethodsImport))
                 .withCollectionExposure((data, httpMethods) -> httpMethods.disable(httpMethodsImport));
-
-        exposeIds(config);
-
     }
 
     //metodo per rendere disponibile tutti gli id di tutte le varie entità
