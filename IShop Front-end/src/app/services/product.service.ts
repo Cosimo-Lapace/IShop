@@ -12,20 +12,24 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) {}
 
+
+
   getProductByCategoryIdPaginate(page : number,pageSize:number, id:number): Observable<GetResponse> {
     return this.httpClient
-      .get<GetResponse>(`${this.baseUrlApi}/search/findByCategoryId?id=${id}&page=${page}&size=${pageSize}`);
+      .get<GetResponse>(`${this.baseUrlApi}/search/findByCategoryId?id=${id}&page=${page}&size=${pageSize}`)
+
   }
 
   getProductList(page:number,pageSize:number): Observable<GetResponse> {
     return this.httpClient
       .get<GetResponse>(`${this.baseUrlApi}?page=${page}&size=${pageSize}`)
+
   }
 
   getProductByCategoryId(id: number): Observable<Product[]> {
     return this.httpClient
       .get<GetResponse>(`${this.baseUrlApi}/search/findByCategoryId?id=${id}`)
-      .pipe(map((response) => response._embedded.products));
+      .pipe(map((response) => response._embedded.products))
   }
   getProductById(id: number): Observable<Product> {
     return this.httpClient.get<Product>(`${this.baseUrlApi}/${id}`);

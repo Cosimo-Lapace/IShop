@@ -8,7 +8,7 @@
           class="col-md-12 text-center"
           *ngIf="products?.length == 0 && searchOk"
         >
-          <app-product-not-found [products]="products"></app-product-not-found>
+          <app-product-not-found  [products]="products"></app-product-not-found>
         </div>
         <!-- end Error Product Not Found -->
         <div class="col-md-3 card-product" *ngFor="let product of products">

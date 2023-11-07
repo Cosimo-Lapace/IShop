@@ -93,6 +93,7 @@ export class ProductListComponent
         this.totalElement = data.page.totalElements;
       },(error) =>{
           this.searchOk = false;
+
       }
       );
     // end get all product

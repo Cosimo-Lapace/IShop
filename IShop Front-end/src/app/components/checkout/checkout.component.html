@@ -3,6 +3,7 @@
 <div class="main-content page-m">
   <div class="section-content section-content-p30 e-spc">
     <div class="container-fluid">
+
       <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
       <div class="form-area" formGroupName="customer">
         <h3>Customer</h3>
@@ -25,9 +26,8 @@
           <div class="col-md-6">
             <div class="input-space">
               <input type="text" [ngClass]="{'error-email-input':isNotEmailEqual}" placeholder="Confirm Email Address" formControlName="confirmEmail">
-              <div class="text-center error-email" *ngIf="isNotEmailEqual">Emails are not created equal</div>
+              <div class="text-center error-email" *ngIf="isNotEmailEqual">Emails are not equal</div>
             </div>
-
           </div>
         </div>
       </div>
@@ -111,12 +111,9 @@
         <div class="row">
           <div class="col-md-12">
             <div class="input-space">
-              <select formControlName="cardType" >
+              <select formControlName="cardType">
                 <option>Visa</option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
+                <option>Mastercard</option>
               </select>
             </div>
           </div>
@@ -142,22 +139,14 @@
           <div class="col-md-5">
             <div class="input-space">
               <select formControlName="cardSecutityMonth">
-                <option>Month</option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
+                <option  *ngFor="let month of cardSecutityMonth">{{month}}</option>
               </select>
             </div>
           </div>
           <div class="col-md-5">
             <div class="input-space">
-              <select formControlName="cardSecutityYear">
-                <option>Year</option>
-                <option></option>
-                <option></option>
-                <option></option>
-                <option></option>
+              <select (change)="yearChange($event)" formControlName="cardSecutityYear">
+                <option *ngFor="let year of cardSecutityYear">{{year}}</option>
               </select>
             </div>
           </div>
@@ -166,9 +155,9 @@
 
       <div class="form-area review">
         <h3>Review Your Order</h3>
-        <b>Total Quantity: 2</b>
+        <b>Total Quantity: {{ totalQuantity }}</b>
         <h4>Shipping: FREE</h4>
-        <B>Total Price: $19.99</B>
+        <B>Total Price: {{ totalPrice | currency : "EUR" : true }}</B>
         <div class="input-space term">
           <label class="au-checkbox">
             <input type="checkbox">
