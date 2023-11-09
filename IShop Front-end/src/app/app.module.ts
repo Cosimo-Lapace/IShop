@@ -22,6 +22,8 @@ import { BackToProductListComponent } from './utilities/back-to-product-list/bac
 import { CartDetailMobileComponent } from './components/cart-components/cart-detail-mobile/cart-detail-mobile.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ErrorMessageCheckoutComponent } from './utilities/error-message-checkout/error-message-checkout.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BackToProductListComponent,
     CartDetailMobileComponent,
     CheckoutComponent,
+    ErrorMessageCheckoutComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule,ReactiveFormsModule],
   providers: [],

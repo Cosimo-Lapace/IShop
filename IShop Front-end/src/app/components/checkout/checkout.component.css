@@ -42,10 +42,10 @@
   padding:0 10px;
   border:1px solid #ccc
 }
-.error-email-input{
+.error-input{
   border-color: var(--primary-color) !important;
 }
-.error-email{
+.error-div{
   color: var(--primary-color);
 }
 .term{
