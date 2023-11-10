@@ -15,6 +15,6 @@ isNotFound:boolean;
 
       setInterval(()=>{
         this.isNotFound= true;
-      },500)
+      },1000)
   }
 }

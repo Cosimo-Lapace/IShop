@@ -12,6 +12,7 @@ import { State } from 'src/app/model/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CountriesService } from 'src/app/services/countries.service';
+import { CustomValidators } from 'src/app/services/validators/custom-validators';
 
 @Component({
   selector: 'app-checkout',
@@ -111,16 +112,18 @@ export class CheckoutComponent implements OnInit {
         firstName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          CustomValidators.notEmptySpace
         ]),
         lastName: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
+          CustomValidators.notEmptySpace
         ]),
         email: new FormControl('', [
           Validators.required,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
         ]),
-        confirmEmail: new FormControl('', [Validators.required,this.emailEqualsValidator()]),
+        confirmEmail: new FormControl('', [Validators.required,CustomValidators.emailEqualsValidator]),
       }),
       shippingAddress: this.formBuilder.group({
         street: [''],
@@ -155,22 +158,7 @@ export class CheckoutComponent implements OnInit {
   }
 
 // control email are equals
-emailEqualsValidator(): ValidatorFn {
-  //custom validator for group form parent
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const customerGroup = control.parent;
-    //check group parent exsist
-    if (customerGroup) {
-      //get email and confirm email
-      const email = customerGroup.get('email').value;
-      const confirmEmail = control.value;
-      //check email and confirm email is equals
-      return email === confirmEmail ? null : { 'emailMismatch': true };
-    }
 
-    return null;
-  };
-}
 //----------------------
   //getter formControl
 
@@ -196,6 +184,13 @@ emailEqualsValidator(): ValidatorFn {
         this.checkoutFormGroup.controls['shippingAddress'].value
       );
     }
+    //last check email and confirmation email
+    if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value ){
+      this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors({ 'mismatch': true });
+    }else{
+      this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors(null);
+    }
+    //-------------
     if(this.checkoutFormGroup.invalid){
       this.checkoutFormGroup.markAllAsTouched()
     }
