@@ -40,32 +40,36 @@
         <div class="row">
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Street*" formControlName="street">
+              <input type="text" [ngClass]="{'error-input':shippingAddressStreet.invalid && (shippingAddressStreet.dirty || shippingAddressStreet.touched)}" placeholder="Street*" formControlName="street">
+              <app-error-message-checkout [textElement]="'Shipping Address Street'" [element]="shippingAddressStreet" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="City*" formControlName="city">
+              <input type="text" [ngClass]="{'error-input':shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)}" placeholder="City*" formControlName="city">
+              <app-error-message-checkout [textElement]="'Shipping Address City'" [element]="shippingAddressCity" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <select formControlName="country" (change)="getStates('shippingAddress')">
+              <select formControlName="country" [ngClass]="{'error-input':shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)}" (change)="getStates('shippingAddress')">
                 <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
               </select>
+              <app-error-message-checkout [textElement]="'shipping Address Country'" [element]="shippingAddressCountry" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <select formControlName="state">
+              <select [ngClass]="{'error-input':shippingAddressState.invalid && (shippingAddressState.dirty || shippingAddressState.touched)}" formControlName="state">
                 <option *ngFor="let shippingAddressState of shippingAddressStates" [ngValue]="shippingAddressState.name">{{shippingAddressState.name}}</option>
               </select>
+              <app-error-message-checkout [textElement]="'shipping Address State'" [element]="shippingAddressState" ></app-error-message-checkout>
             </div>
           </div>
-
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Zip Code / Postal Code*" formControlName="postalCode">
+              <input type="text" [ngClass]="{'error-input':shippingAddressPostalCode.invalid && (shippingAddressPostalCode.dirty || shippingAddressPostalCode.touched)}"  placeholder="Zip Code / Postal Code*" formControlName="postalCode">
+              <app-error-message-checkout [textElement]="'Postal Code'" [element]="shippingAddressPostalCode" ></app-error-message-checkout>
             </div>
           </div>
         </div>
@@ -75,7 +79,6 @@
           <input type="checkbox" checked="checked" (change)="billingAddress($event)">
           <span class="au-checkmark"></span> Bill Address same as Shipping Adress
         </label>
-
       </div>
       <!-- billing Address -->
       <div class="form-area" formGroupName="billingAddress" *ngIf="isBillingAddress">
@@ -83,36 +86,40 @@
         <div class="row">
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Street" formControlName="street">
+              <input type="text" [ngClass]="{'error-input':billingAddressStreet.invalid && (billingAddressStreet.dirty || billingAddressStreet.touched)}"  placeholder="Street" formControlName="street">
+              <app-error-message-checkout [textElement]="'Shipping Address Street'" [element]="billingAddressStreet" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="City" formControlName="city">
+              <input type="text" [ngClass]="{'error-input':billingAddressCity.invalid && (billingAddressCity.dirty || billingAddressCity.touched)}" placeholder="City" formControlName="city">
+              <app-error-message-checkout [textElement]="'Shipping Address City'" [element]="billingAddressCity" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <select formControlName="country" (change)="getStates('billingAddress')">
+              <select formControlName="country" [ngClass]="{'error-input':billingAddressCountry.invalid && (billingAddressCountry.dirty || shippingAddressPostalCode.touched)}"  (change)="getStates('billingAddress')">
                 <option *ngFor="let country of countries" [ngValue]="country">{{country.name}}</option>
               </select>
+              <app-error-message-checkout [textElement]="'shipping Address Country'" [element]="billingAddressCountry" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <select formControlName="state">
+              <select formControlName="state" [ngClass]="{'error-input':billingAddressState.invalid && (billingAddressState.dirty || billingAddressState.touched)}">
                 <option *ngFor="let billingAddressState of billingAddressStates" [ngValue]="billingAddressState.name">{{billingAddressState.name}}</option>
               </select>
+              <app-error-message-checkout [textElement]="'shipping Address State'" [element]="billingAddressState" ></app-error-message-checkout>
             </div>
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" placeholder="Zip Code / Postal Code" formControlName="postalCode">
+              <input type="text" [ngClass]="{'error-input':billingAddressPostalCode.invalid && (billingAddressPostalCode.dirty || billingAddressPostalCode.touched)}" placeholder="Zip Code / Postal Code" formControlName="postalCode">
+              <app-error-message-checkout [textElement]="'Postal Code'" [element]="billingAddressPostalCode" ></app-error-message-checkout>
             </div>
           </div>
         </div>
       </div>
-
 <!-- END billing Address -->
       <div class="form-area" formGroupName="creditCard">
         <h3>Credit Card*</h3>

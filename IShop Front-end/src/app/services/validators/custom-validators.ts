@@ -21,9 +21,13 @@ export class CustomValidators {
         const email = customerGroup.get('email').value;
         const confirmEmail = control.value;
         //Check that email and confirmation email are the same
-        return email === confirmEmail ? null : { 'misConfirmEmail': true };
+        if(email === confirmEmail){
+          return null
+        }
+        else{
+          return { 'misConfirmEmail': true }
+        }
       }
-
       return null;
     };
     //--------------------

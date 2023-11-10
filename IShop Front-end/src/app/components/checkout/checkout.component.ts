@@ -123,21 +123,53 @@ export class CheckoutComponent implements OnInit {
           Validators.required,
           Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
         ]),
-        confirmEmail: new FormControl('', [Validators.required,CustomValidators.emailEqualsValidator]),
+        confirmEmail: new FormControl('', [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),,CustomValidators.emailEqualsValidator]),
       }),
       shippingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        country: [''],
-        state: [''],
-        postalCode: [''],
+        street: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notEmptySpace
+        ]),
+        city: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notEmptySpace
+        ]),
+        country: new FormControl('', [
+          Validators.required,
+        ]),
+        state: new FormControl('', [
+          Validators.required,
+        ]),
+        postalCode: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notEmptySpace
+        ]),
       }),
       billingAddress: this.formBuilder.group({
-        street: [''],
-        city: [''],
-        country: [''],
-        state: [''],
-        postalCode: [''],
+        street: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notEmptySpace
+        ]),
+        city: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notEmptySpace
+        ]),
+        country: new FormControl('', [
+          Validators.required,
+        ]),
+        state: new FormControl('', [
+          Validators.required,
+        ]),
+        postalCode: new FormControl('', [
+          Validators.required,
+          Validators.minLength(2),
+          CustomValidators.notEmptySpace
+        ]),
       }),
       creditCard: this.formBuilder.group({
         cardType: [''],
@@ -160,7 +192,7 @@ export class CheckoutComponent implements OnInit {
 // control email are equals
 
 //----------------------
-  //getter formControl
+  //getter formControl customer
 
   get firstName() {
     return this.checkoutFormGroup.get('customer.firstName');
@@ -175,6 +207,42 @@ export class CheckoutComponent implements OnInit {
   get confirmEmail(){
     return this.checkoutFormGroup.get('customer.confirmEmail');
   }
+  //getter formControl Shipping and billing Address
+
+  get shippingAddressStreet(){
+    return this.checkoutFormGroup.get('shippingAddress.street');
+  }
+  get shippingAddressCity(){
+    return this.checkoutFormGroup.get('shippingAddress.city');
+  }
+  get shippingAddressCountry(){
+    return this.checkoutFormGroup.get('shippingAddress.country');
+  }
+  get shippingAddressState(){
+    return this.checkoutFormGroup.get('shippingAddress.state');
+  }
+  get shippingAddressPostalCode(){
+    return this.checkoutFormGroup.get('shippingAddress.postalCode');
+  }
+
+  get billingAddressStreet(){
+    return this.checkoutFormGroup.get('billingAddress.street');
+  }
+  get billingAddressCity(){
+    return this.checkoutFormGroup.get('billingAddress.city');
+  }
+  get billingAddressCountry(){
+    return this.checkoutFormGroup.get('billingAddress.country');
+  }
+  get billingAddressState(){
+    return this.checkoutFormGroup.get('billingAddress.state');
+  }
+  get billingAddressPostalCode(){
+    return this.checkoutFormGroup.get('billingAddress.postalCode');
+  }
+
+
+
 //---------------------------
   //submit
   onSubmit() {
@@ -185,8 +253,8 @@ export class CheckoutComponent implements OnInit {
       );
     }
     //last check email and confirmation email
-    if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value ){
-      this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors({ 'mismatch': true });
+    if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value){
+      this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors({ 'misConfirmEmail': true });
     }else{
       this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors(null);
     }
