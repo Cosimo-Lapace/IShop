@@ -68,8 +68,8 @@
           </div>
           <div class="col-md-12">
             <div class="input-space">
-              <input type="text" [ngClass]="{'error-input':shippingAddressPostalCode.invalid && (shippingAddressPostalCode.dirty || shippingAddressPostalCode.touched)}"  placeholder="Zip Code / Postal Code*" formControlName="postalCode">
-              <app-error-message-checkout [textElement]="'Postal Code'" [element]="shippingAddressPostalCode" ></app-error-message-checkout>
+              <input type="text"  [ngClass]="{'error-input':shippingAddressPostalCode.invalid && (shippingAddressPostalCode.dirty || shippingAddressPostalCode.touched)}"  placeholder="Zip Code / Postal Code*" formControlName="postalCode">
+              <app-error-message-checkout  [textElement]="'Postal Code'" [element]="shippingAddressPostalCode" ></app-error-message-checkout>
             </div>
           </div>
         </div>
@@ -140,7 +140,7 @@
           <div class="clearfix"></div>
           <div class="col-md-8">
             <div class="input-space">
-              <input type="text" placeholder="Card number" formControlName="cardNumber" >
+              <input type="text" (input)="cardNumber($event)" placeholder="Card number" formControlName="cardNumber" >
             </div>
           </div>
           <div class="col-md-4">

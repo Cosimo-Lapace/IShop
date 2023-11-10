@@ -12,6 +12,7 @@ import { State } from 'src/app/model/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CountriesService } from 'src/app/services/countries.service';
+import { CreditCardService } from 'src/app/services/credit-card.service';
 import { CustomValidators } from 'src/app/services/validators/custom-validators';
 
 @Component({
@@ -42,7 +43,8 @@ export class CheckoutComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cartService: CartService,
     private checkoutService: CheckoutService,
-    private countriesService: CountriesService
+    private countriesService: CountriesService,
+    private creditCardService:CreditCardService
   ) {}
 
   //service for total price and quantity
@@ -105,6 +107,12 @@ export class CheckoutComponent implements OnInit {
       .getMonths(startMonth)
       .subscribe((data) => (this.cardSecutityMonth = data));
   }
+  cardNumber(event){
+    let cardInputNumber = event.target.value
+   let cardType = this.creditCardService.detectCreditCardType(cardInputNumber)
+   console.log(cardType)
+  }
+
   //initialization checkout form
   checkoutForm() {
     this.checkoutFormGroup = this.formBuilder.group({
@@ -262,7 +270,7 @@ export class CheckoutComponent implements OnInit {
     if(this.checkoutFormGroup.invalid){
       this.checkoutFormGroup.markAllAsTouched()
     }
-
+    console.log(this.checkoutFormGroup.get('customer').value);
     console.log(this.checkoutFormGroup.get('shippingAddress').value);
     console.log(this.checkoutFormGroup.get('billingAddress').value);
   }
