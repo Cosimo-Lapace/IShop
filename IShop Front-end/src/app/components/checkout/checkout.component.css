@@ -42,6 +42,10 @@
   padding:0 10px;
   border:1px solid #ccc
 }
+.img-card-type{
+  width: 50px !important;
+  margin-bottom: 10px;
+}
 .error-input{
   border-color: var(--primary-color) !important;
 }

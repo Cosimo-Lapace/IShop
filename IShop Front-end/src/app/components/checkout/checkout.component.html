@@ -126,10 +126,8 @@
         <div class="row">
           <div class="col-md-12">
             <div class="input-space">
-              <select formControlName="cardType">
-                <option>Visa</option>
-                <option>Mastercard</option>
-              </select>
+              <img [src]="cardTypeImg" alt="cardType" class="img-fluid img-card-type" *ngIf="isCardTypeImg">
+              <input type="text" formControlName="cardType" placeholder="Card Type" #cardType>
             </div>
           </div>
           <div class="col-md-12">

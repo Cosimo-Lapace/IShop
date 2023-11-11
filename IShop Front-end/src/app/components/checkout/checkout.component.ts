@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -33,6 +33,9 @@ export class CheckoutComponent implements OnInit {
   //card section
   cardSecutityYear: number[] = [];
   cardSecutityMonth: number[] = [];
+  @ViewChild('cardType') cardType:ElementRef;
+  cardTypeImg:string;
+  isCardTypeImg:boolean = false;
   //------
   //end page
   totalPrice: number = 0; //total price order
@@ -110,7 +113,24 @@ export class CheckoutComponent implements OnInit {
   cardNumber(event){
     let cardInputNumber = event.target.value
    let cardType = this.creditCardService.detectCreditCardType(cardInputNumber)
-   console.log(cardType)
+   switch (cardType){
+    case "Visa":
+      this.cardTypeImg = "../../../assets/images/cardType/Visa_Inc._logo.svg.png"
+      this.isCardTypeImg = true;
+      break;
+      case "MasterCard":
+        this.cardTypeImg = "../../../assets/images/cardType/MasterCard-Logo-1990.png"
+        this.isCardTypeImg = true;
+        break;
+        case "American Express":
+        this.cardTypeImg = "../../../assets/images/cardType/png-transparent-amex-card-credit-logo-logos-logos-and-brands-icon.png"
+        this.isCardTypeImg = true;
+        break;
+      default:
+        this.cardTypeImg = ""
+        this.isCardTypeImg = false;
+   }
+    this.cardType.nativeElement.value = cardType
   }
 
   //initialization checkout form
