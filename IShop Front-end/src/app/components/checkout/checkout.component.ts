@@ -1,11 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
   FormGroup,
-  ValidatorFn,
-  Validators,
 } from '@angular/forms';
 import { Country } from 'src/app/model/country';
 import { State } from 'src/app/model/state';
@@ -13,7 +8,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CountriesService } from 'src/app/services/countries.service';
 import { CreditCardService } from 'src/app/services/credit-card.service';
-import { CustomValidators } from 'src/app/services/validators/custom-validators';
+
 
 @Component({
   selector: 'app-checkout',
@@ -43,7 +38,6 @@ export class CheckoutComponent implements OnInit {
   //------
 
   constructor(
-    private formBuilder: FormBuilder,
     private cartService: CartService,
     private checkoutService: CheckoutService,
     private countriesService: CountriesService,
@@ -133,81 +127,9 @@ export class CheckoutComponent implements OnInit {
     this.cardType.nativeElement.value = cardType
   }
 
-  //initialization checkout form
+
   checkoutForm() {
-    this.checkoutFormGroup = this.formBuilder.group({
-      customer: this.formBuilder.group({
-        firstName: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-        lastName: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-        email: new FormControl('', [
-          Validators.required,
-          Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-        ]),
-        confirmEmail: new FormControl('', [Validators.required,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),,CustomValidators.emailEqualsValidator]),
-      }),
-      shippingAddress: this.formBuilder.group({
-        street: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-        city: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-        country: new FormControl('', [
-          Validators.required,
-        ]),
-        state: new FormControl('', [
-          Validators.required,
-        ]),
-        postalCode: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-      }),
-      billingAddress: this.formBuilder.group({
-        street: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-        city: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-        country: new FormControl('', [
-          Validators.required,
-        ]),
-        state: new FormControl('', [
-          Validators.required,
-        ]),
-        postalCode: new FormControl('', [
-          Validators.required,
-          Validators.minLength(2),
-          CustomValidators.notEmptySpace
-        ]),
-      }),
-      creditCard: this.formBuilder.group({
-        cardType: [''],
-        cardName: [''],
-        cardNumber: [''],
-        cardSecutityCode: [''],
-        cardSecutityMonth: [''],
-        cardSecutityYear: [''],
-      }),
-    });
+    this.checkoutFormGroup = this.checkoutService.checkoutForm();
     //countries and states
     this.getCountriesAndStates();
     //end countries and states
@@ -215,6 +137,7 @@ export class CheckoutComponent implements OnInit {
     //credit month and year
     this.getMonthsAndYears();
     //end credit month and year
+
   }
 
 // control email are equals
@@ -269,11 +192,31 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutFormGroup.get('billingAddress.postalCode');
   }
 
+  get creditCardType(){
+    return this.checkoutFormGroup.get('creditCard.cardType')
+  }
+  get creditCardName(){
+    return this.checkoutFormGroup.get('creditCard.cardName')
+  }
+
+  get creditCardNumber(){
+    return this.checkoutFormGroup.get('creditCard.cardNumber')
+  }
+
+  get creditCardSecutityCode(){
+    return this.checkoutFormGroup.get('creditCard.cardSecutityCode')
+  }
+
+
+
+
+
+
 
 
 //---------------------------
   //submit
-  onSubmit() {
+  onSubmit(event) {
     //checkbox, control checkbox status true or false, and send currectly data
     if (!this.isBillingAddress) {
       this.checkoutFormGroup.controls['billingAddress'].setValue(
@@ -281,7 +224,9 @@ export class CheckoutComponent implements OnInit {
       );
     }
     //last check email and confirmation email
-    if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value){
+    if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value
+      ||this.checkoutFormGroup.get('customer').get('confirmEmail').value.trim() === ''
+    ){
       this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors({ 'misConfirmEmail': true });
     }else{
       this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors(null);
