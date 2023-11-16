@@ -50,21 +50,21 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id",referencedColumnName = "id")
-    private Address shippingAddressId;
+    private Address shippingAddress;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id",referencedColumnName = "id")
-    private Address billingAddressId;
+    private Address billingAddress;
 
-    public void add(OrderItem orderItem){
-        if(orderItem != null){
+    public void add(OrderItem item){
+        if(item != null){
             if(this.orderItems == null){
                 this.orderItems = new HashSet<>();
             }
-            this.orderItems.add(orderItem);
-            orderItem.setOrder(this);
+            this.orderItems.add(item);
+            item.setOrder(this);
         }
     }
 
