@@ -40,6 +40,8 @@ public class DataRestConfig implements RepositoryRestConfigurer {
         disabledClassHttpMethod(Country.class,config, httpMethodsImport);
         //disable method in State class
         disabledClassHttpMethod(State.class,config, httpMethodsImport);
+
+        exposeIds(config);
     }
 
     private static void disabledClassHttpMethod(Class theclass,RepositoryRestConfiguration config, HttpMethod[] httpMethodsImport) {
