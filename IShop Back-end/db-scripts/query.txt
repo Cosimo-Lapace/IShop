@@ -1,0 +1,14 @@
+SELECT
+    o.id AS order_id,
+    o.order_tracking_number,
+    o.total_price,
+    o.total_quantity,
+    o.billing_address_id,
+    c.*,  
+    oi.product_id,  
+    p.* 
+FROM
+    ishop.orders o 
+    INNER JOIN ishop.customer c ON o.customer_id = c.id
+    INNER JOIN ishop.order_item oi ON o.id = oi.order_id
+    INNER JOIN ishop.product p ON oi.product_id = p.id;
