@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Set;
+
 
 @Service
 public class OrderServiceImpl implements OrderSerivice {
@@ -20,12 +19,21 @@ public class OrderServiceImpl implements OrderSerivice {
     public List<OrderDTO> getAllOrders() {
 
 
-            String sql = "SELECT o.id AS order_id, o.order_tracking_number, o.total_price, o.total_quantity, " +
-                    "o.billing_address_id, c.*, oi.product_id, p.* " +
-                    "FROM ishop.orders o " +
-                    "INNER JOIN ishop.customer c ON o.customer_id = c.id " +
-                    "INNER JOIN ishop.order_item oi ON o.id = oi.order_id " +
-                    "INNER JOIN ishop.product p ON oi.product_id = p.id";
+            String sql = "SELECT \n" +
+                    "    o.id AS  order_id,\n" +
+                    "    o.order_tracking_number,\n" +
+                    "    o.total_price,\n" +
+                    "    o.total_quantity,\n" +
+                    "    o.billing_address_id,\n" +
+                    "    c.*,  \n" +
+                    "    oi.product_id,  \n" +
+                    "    p.* \n" +
+                    "FROM\n" +
+                    "    ishop.orders o \n" +
+                    "    INNER JOIN ishop.customer c ON o.customer_id = c.id\n" +
+                    "    INNER JOIN ishop.order_item oi ON o.id = oi.order_id\n" +
+                    "    INNER JOIN ishop.product p ON oi.product_id = p.id\n" +
+                    "GROUP BY order_id;";
 
         return jdbcTemplate.query(sql, (resultSet, rowNum) -> {
                 OrderDTO orderDTO = new OrderDTO();
@@ -36,19 +44,20 @@ public class OrderServiceImpl implements OrderSerivice {
                 orderDTO.setTotalQuantity(resultSet.getInt("total_quantity"));
                 orderDTO.setBillingAddressId(resultSet.getLong("billing_address_id"));
 
-                // Set dei campi del customer
+
                 orderDTO.setCustomerId(resultSet.getLong("id"));
                 orderDTO.setCustomerFirstName(resultSet.getString("c.first_name"));
                 orderDTO.setCustomerLastName(resultSet.getString("c.last_name"));
                 orderDTO.setCustomerEmail(resultSet.getString("c.email"));
-                // ... (aggiungi altri campi customer secondo necessità)
 
-                // Set del campo del order_item
+
+
                 orderDTO.setProductId(resultSet.getLong("product_id"));
                 orderDTO.setProductName(resultSet.getString("p.name"));
                 orderDTO.setProductImageUrl(resultSet.getString("p.image_url"));
                 orderDTO.setProductDescription(resultSet.getString("p.description"));
                 orderDTO.setProductUnitPrice(resultSet.getBigDecimal("p.unit_price"));
+
 
 
 
