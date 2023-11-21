@@ -12,29 +12,20 @@ public class OrderDTO {
     private String orderTrackingNumber;
     private BigDecimal totalPrice;
     private int totalQuantity;
-    private Long billingAddressId;
+
+    private String billingAddressCity;
+    private String billingAddressCountry;
+    private String billingAddressState;
+    private String billingAddressSreet;
+    private String billingAddressZipCode;
+
+    private String shippingAddressCity;
+    private String shippinhAddressCountry;
+    private String shippingAddressState;
+    private String shippingAddressSreet;
+    private String shippingAddressZipCode;
 
     private Long customerId;
-
-    @Override
-    public String toString() {
-        return "OrderDTO{" +
-                "orderId=" + orderId +
-                ", orderTrackingNumber='" + orderTrackingNumber + '\'' +
-                ", totalPrice=" + totalPrice +
-                ", totalQuantity=" + totalQuantity +
-                ", billingAddressId=" + billingAddressId +
-                ", customerId=" + customerId +
-                ", customerFirstName='" + customerFirstName + '\'' +
-                ", customerLastName='" + customerLastName + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", productId=" + productId +
-                ", productName='" + productName + '\'' +
-                ", productImageUrl='" + productImageUrl + '\'' +
-                ", productDescription='" + productDescription + '\'' +
-                ", productUnitPrice=" + productUnitPrice +
-                '}';
-    }
 
     private String customerFirstName;
     private String customerLastName;
