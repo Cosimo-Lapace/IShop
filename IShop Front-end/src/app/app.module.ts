@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-components/product-list/product-list.component';
@@ -21,8 +20,9 @@ import { ButtonComponent } from './utilities/button/button.component';
 import { BackToProductListComponent } from './utilities/back-to-product-list/back-to-product-list.component';
 import { CartDetailMobileComponent } from './components/cart-components/cart-detail-mobile/cart-detail-mobile.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {  ReactiveFormsModule } from '@angular/forms';
 import { ErrorMessageCheckoutComponent } from './utilities/error-message-checkout/error-message-checkout.component';
+import { OrdersComponent } from './components/back-office/orders/orders.component';
 
 
 
@@ -46,6 +46,7 @@ import { ErrorMessageCheckoutComponent } from './utilities/error-message-checkou
     CartDetailMobileComponent,
     CheckoutComponent,
     ErrorMessageCheckoutComponent,
+    OrdersComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule,ReactiveFormsModule],
   providers: [],

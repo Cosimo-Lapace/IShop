@@ -1,0 +1,89 @@
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <table class="table table-bordered" *ngFor="let order of orders; let i = index">
+        <tr>
+          <th class="product-customer">Product Customer</th>
+          <th class="product-tacking-number">Order Tracking Number</th>
+          <th class="product-items">Product Items</th>
+          <th class="product-data">Data Created</th>
+          <th class="product-data">Data Updated</th>
+          <th class="product-data">Status</th>
+        </tr>
+        <tr>
+          <td class="product-customer order-id"><p>{{order.customerFirstName}}</p>
+            <p>{{order.customerLastName}}</p>
+            <p>{{order.customerEmail}}</p></td>
+          <td class="product-tacking-number">{{order.orderTrackingNumber}}</td>
+          <td class="product-items">
+            <div class="row">
+              <div class="col-md-2">
+                <img [src]="order.productImageUrl" alt="" class="img-fluid" width="50px">
+              </div>
+              <div class="col-md-1 justify-content-center">
+                <p>Id: {{order.productId}}</p>
+
+              </div>
+              <div class="col-md-3 justify-content-center">
+                <p>item price: {{order.productUnitPrice | currency : "EUR" : true}}</p>
+              </div>
+              <div class="col-md-2 justify-content-center">
+                <p>item quantity: {{order.orderItemQuantity}}</p>
+              </div>
+
+
+          </div>
+          </td>
+          <td class="product-data">Data Created</td>
+          <td class="product-data">Data Updated</td>
+          <td class="product-data"><app-button [buttonText]="'Status'"></app-button>
+        </tr>
+          <tr>
+            <th class="colspanth" colspan="4"></th>
+            <th class="orders-th-secondary">Total Quantity</th>
+            <th class="orders-th-secondary">Total Price</th>
+          </tr>
+            <tr>
+              <td class="orders-td-secondary" colspan="4"></td>
+              <td class="orders-td-secondary" >{{order.totalQuantity}}</td>
+              <td class="orders-td-secondary" >{{order.totalPrice| currency : "EUR" : true}}</td>
+            </tr>
+        </table>
+        <div class="row">
+          <div class="col-md-6 div-empty"></div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-4" class="div-paginator">
+                <ngb-pagination
+                  [(page)]="pageNumber"
+                  [pageSize]="pageSize"
+                  [collectionSize]="totalElement"
+                  [maxSize]="2"
+                  (pageChange)="pageChange()"
+                >
+                </ngb-pagination>
+              </div>
+              <div
+                class="col-md-8 mt-4 div-page-size"
+                style="text-align: center"
+                *ngIf="orders?.length !== 0"
+              >
+                <span class="span-page-size">Page Size </span>
+
+                <select
+                  #SelectedPagination
+                  (change)="selectedPagination(SelectedPagination.value)"
+                >
+                  <option selected></option>
+                  <option>2</option>
+                  <option>5</option>
+                  <option>10</option>
+                  <option>25</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

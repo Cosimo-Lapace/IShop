@@ -13,7 +13,8 @@
         <!-- end Error Product Not Found -->
         <div class="col-md-3 card-product" *ngFor="let product of products">
           <div class="product-box">
-            <a routerLink="/products/{{ product.id }}">
+            <a routerLink="/products/{{product.id}}">
+
               <img
                 src="{{ product.imageUrl }}"
                 alt="{{ product.imageUrl }}"
@@ -24,7 +25,6 @@
               <h3 class="name">{{ product.name }}</h3>
             </a>
             <h2 #description class="description">{{ product.description }}</h2>
-
             <div class="price">
               {{ product.unitPrice | currency : "EUR" : true }}
             </div>

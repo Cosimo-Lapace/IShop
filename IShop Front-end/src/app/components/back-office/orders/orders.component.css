@@ -1,0 +1,19 @@
+.product-customer{
+  width: 10%;
+}
+.product-tacking-number{
+  width: 15%;
+}
+.product-data{
+  width: 8%;
+}
+.colspanth{
+  background-color:var(--bs-table-bg) !important;
+}
+.orders-th-secondary,.orders-td-secondary{
+  height: 5vh !important;
+}
+.orders-td-secondary{
+  text-align: center;
+}
+

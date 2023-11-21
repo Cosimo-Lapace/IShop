@@ -5,6 +5,7 @@ import { Error404Component } from './error/error404/error404.component';
 import { ProductDetailComponent } from './components/product-components/product-detail/product-detail.component';
 import { CartDetailComponent } from './components/cart-components/cart-detail/cart-detail.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/back-office/orders/orders.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path:'cart/detail',
     component:CartDetailComponent
+  },
+  {
+    path:'orders',
+    component:OrdersComponent
   },
   {
     path:'checkout',
