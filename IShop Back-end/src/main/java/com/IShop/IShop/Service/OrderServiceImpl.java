@@ -24,6 +24,7 @@ public class OrderServiceImpl implements OrderSerivice {
     public Page<OrderDTO> getAllOrders(Pageable pageable) {
 
 
+
         String sql = "SELECT\n" +
                 "  o.id AS order_id,\n" +
                 "  o.order_tracking_number,\n" +
@@ -42,9 +43,9 @@ public class OrderServiceImpl implements OrderSerivice {
                 "  INNER JOIN ishop.product p ON oi.product_id = p.id\n" +
                 "  INNER JOIN ishop.address b ON o.billing_address_id = b.id\n" +
                 "  INNER JOIN ishop.address s ON o.shipping_address_id = s.id\n" +
-                "GROUP BY order_id\n"
+                "GROUP BY order_id\n"+
+                "LIMIT "+ pageable.getPageSize() + " OFFSET " + pageable.getOffset();
                 ;
-
      List<OrderDTO> dtos = jdbcTemplate.query(sql,(resultSet, rowNum) -> {
             OrderDTO orderDTO = new OrderDTO();
             orderDTO.setOrderId(resultSet.getLong("order_id"));
@@ -72,7 +73,7 @@ public class OrderServiceImpl implements OrderSerivice {
             orderDTO.setShippingAddressZipCode(resultSet.getString("s.zip_code"));
 
 
-            orderDTO.setProductId(resultSet.getLong("product_id"));
+           orderDTO.setProductId(resultSet.getLong("product_id"));
             orderDTO.setProductName(resultSet.getString("p.name"));
             orderDTO.setProductImageUrl(resultSet.getString("p.image_url"));
             orderDTO.setProductDescription(resultSet.getString("p.description"));

@@ -1,9 +1,11 @@
 package com.IShop.IShop.dto;
 
+import com.IShop.IShop.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +34,7 @@ public class OrderDTO {
     private  String customerEmail;
 
     private Long productId;
+
 
     private String productName;
     private String productImageUrl;

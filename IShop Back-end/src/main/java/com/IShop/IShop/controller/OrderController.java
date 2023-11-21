@@ -18,9 +18,9 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderService;
 
+    //http://localhost:8080/api/orders/getAllOrders?page=yzf&size=yzf
     @GetMapping("/getAllOrders")
-    public Page<OrderDTO> getAllOrders(Pageable pageable) {
-
+    public  Page<OrderDTO> getAllOrders(Pageable pageable) {
 
         return orderService.getAllOrders(pageable);
     }
