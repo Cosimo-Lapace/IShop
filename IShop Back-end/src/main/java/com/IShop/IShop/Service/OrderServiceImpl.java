@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderSerivice {
                 "  s.*,\n" +
                 "  c.*,\n" +
                 "  oi.product_id,\n" +
+                "  oi.quantity,\n" +
                 "  p.*\n" +
                 "FROM\n" +
                 "  ishop.orders o\n" +
@@ -72,6 +73,7 @@ public class OrderServiceImpl implements OrderSerivice {
             orderDTO.setShippingAddressSreet(resultSet.getString("s.street"));
             orderDTO.setShippingAddressZipCode(resultSet.getString("s.zip_code"));
 
+            orderDTO.setOrderItemQuantity(resultSet.getBigDecimal("oi.quantity"));
 
            orderDTO.setProductId(resultSet.getLong("product_id"));
             orderDTO.setProductName(resultSet.getString("p.name"));

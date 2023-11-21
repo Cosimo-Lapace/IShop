@@ -35,6 +35,7 @@ public class OrderDTO {
 
     private Long productId;
 
+    private BigDecimal orderItemQuantity;
 
     private String productName;
     private String productImageUrl;
