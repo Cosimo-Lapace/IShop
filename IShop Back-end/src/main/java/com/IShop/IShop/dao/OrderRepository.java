@@ -12,6 +12,6 @@ import java.util.List;
 @CrossOrigin("http://localhost:4200")
 public interface OrderRepository  extends JpaRepository<Order,Long> {
 
-
+List<Order> findAll();
 
 }
