@@ -1,22 +1,17 @@
 package com.IShop.IShop.Service;
-
-
+import com.IShop.IShop.dao.OrderItemRepository;
 import com.IShop.IShop.dao.OrderRepository;
 import com.IShop.IShop.dao.ProductRepository;
 import com.IShop.IShop.dto.OrderDTO;
-
-import com.IShop.IShop.entity.Customer;
 import com.IShop.IShop.entity.Order;
 import com.IShop.IShop.entity.OrderItem;
 import com.IShop.IShop.entity.Product;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +25,60 @@ public class OrderServiceImpl implements OrderSerivice {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private OrderRepository orderRepository;
+    private OrderItemRepository orderItemRepository;
+    private ProductRepository productRepository;
 
 
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository,OrderItemRepository orderItemRepository,ProductRepository productRepository) {
         this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
+        this.productRepository = productRepository;
     }
 
+
+
+    private List<OrderItem> getOrderItem(Long orderId){
+        List<OrderItem> orderItem = this.orderItemRepository.findByOrderId(orderId);
+        return orderItem;
+
+    }
+
+    private Product getProductDetails(Long productId) {
+        Product product = this.productRepository.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Prodotto not found: " + productId));
+
+        return new Product(
+                product.getId(),
+                product.getSku(),
+                product.getName(),
+                product.getDescription(),
+                product.getUnitPrice(),
+                product.getImageUrl(),
+                product.getUnitsInStock(),
+                product.getDataCreated(),
+                product.getLastUpdated()
+        );
+    }
+
+
     private OrderDTO mapOrderToOrderDTO(Order order) {
-        return new OrderDTO(order.getId(), order.getOrderTrackingNumber(), order.getTotalPrice(),
-                order.getTotalQuantity(), order.getStatus(), order.getDataCreated(), order.getLastUpdated(), order.getCustomer().getFirstName(), order.getCustomer().getLastName(), order.getCustomer().getEmail(),
+        List<OrderItem> orderItems = getOrderItem(order.getId());
+        List<Product> products = new ArrayList<>();
+        for (OrderItem orderitem:orderItems) {
+            products.add(getProductDetails(orderitem.getProductId()));
+        }
+
+
+
+
+        return new OrderDTO(
+                order.getId(), order.getOrderTrackingNumber(), order.getTotalPrice(),
+                order.getTotalQuantity(), order.getStatus(),
+                order.getDataCreated(),
+                order.getLastUpdated(),
+                order.getCustomer().getFirstName(),
+                order.getCustomer().getLastName(),
+                order.getCustomer().getEmail(),
                 order.getShippingAddress().getCity(),
                 order.getShippingAddress().getCountry(),
                 order.getShippingAddress().getState(),
@@ -48,10 +88,12 @@ public class OrderServiceImpl implements OrderSerivice {
                 order.getBillingAddress().getCountry(),
                 order.getBillingAddress().getState(),
                 order.getBillingAddress().getStreet(),
-                order.getBillingAddress().getZipCode());
+                order.getBillingAddress().getZipCode(),
+                products
+
+        );
+
     }
-
-
     @Override
 
     public Page<OrderDTO> getAllOrders(Pageable pageable) {

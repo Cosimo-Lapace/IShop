@@ -1,6 +1,8 @@
 package com.IShop.IShop.dto;
 
-import com.IShop.IShop.entity.*;
+
+
+import com.IShop.IShop.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +12,6 @@ import java.util.*;
 @Getter
 @Setter
 public class OrderDTO {
-
 
 
     private Long orderId;
@@ -39,10 +40,11 @@ public class OrderDTO {
     private String billingAddressState;
     private String billingAddressStreet;
     private String billingAddressZipCode;
-    public OrderDTO(Long id, String orderTrackingNumber, BigDecimal totalPrice, int totalQuantity, String status, Date dataCreated, Date lastUpdated, String firstName,String lastName,String email,
-                    String shippingAddressCity,String shippingAddressCountry,String shippingAddressState,String shippingAddressStreet,String shippingAddressZipCode,
-                    String billingAddressCity,String billingAddressCountry,String billingAddressState,String billingAddressStreet,String billingAddressZipCode
-                    ) {
+    private  List<Product> products;
+
+    public OrderDTO(Long id, String orderTrackingNumber, BigDecimal totalPrice, int totalQuantity, String status, Date dataCreated, Date lastUpdated, String firstName, String lastName, String email, String shippingAddressCity, String shippingAddressCountry, String shippingAddressState, String shippingAddressStreet, String shippingAddressZipCode, String billingAddressCity, String billingAddressCountry, String billingAddressState, String billingAddressStreet, String billingAddressZipCode
+    ,List<Product>products
+    ) {
         this.orderId = id;
         this.orderTrackingNumber = orderTrackingNumber;
         this.totalPrice = totalPrice;
@@ -66,32 +68,18 @@ public class OrderDTO {
         this.billingAddressStreet = billingAddressStreet;
         this.billingAddressZipCode = billingAddressZipCode;
 
-
-
+        this.products = products;
 
 
 
     }
 
-    public OrderDTO(){
+    public OrderDTO() {
 
     }
-  /*  private Long customerId;
-
-    private String customerFirstName;
-    private String customerLastName;
-    private  String customerEmail;
-
-    private Long productId;
-
-    private BigDecimal orderItemQuantity;
 
 
-    private List<Product> products = new ArrayList<>();
-    private String productName;
-    private String productImageUrl;
-    private String productDescription;
-    private BigDecimal productUnitPrice;*/
+
 
 }
 

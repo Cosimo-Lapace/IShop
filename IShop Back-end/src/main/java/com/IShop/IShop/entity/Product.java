@@ -2,13 +2,10 @@ package com.IShop.IShop.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 
 
@@ -54,6 +51,24 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory category;
+
+
+    public Product(Long id, String sku, String name, String description, BigDecimal unitPrice, String imageUrl, int unitsInStock, Date dataCreated, Date lastUpdated
+    ) {
+        this.id = id;
+        this.sku = sku;
+        this.name = name;
+        this.description = description;
+        this.unitPrice = unitPrice;
+        this.imageUrl = imageUrl;
+        this.unitsInStock = unitsInStock;
+        this.dataCreated = dataCreated;
+        this.lastUpdated = lastUpdated;
+
+    }
+    public Product(){
+
+    }
 
 
 }
