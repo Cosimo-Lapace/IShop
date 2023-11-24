@@ -1,8 +1,21 @@
+import { Product } from "./product";
+
+
 export class Order {
   orderId: number;
   orderTrackingNumber: string;
   totalPrice: number;
   totalQuantity: number;
+  status:String;
+  dataCreated:Date;
+  lastUpdated:Date;
+
+
+  shippingAddressCity: string;
+  shippingAddressCountry: string;
+  shippingAddressState: string;
+  shippingAddressSreet: string;
+  shippingAddressZipCode: string;
 
   billingAddressCity: string;
   billingAddressCountry: string;
@@ -10,24 +23,9 @@ export class Order {
   billingAddressSreet: string;
   billingAddressZipCode: string;
 
-  shippingAddressCity: string;
-  shippinhAddressCountry: string;
-  shippingAddressState: string;
-  shippingAddressSreet: string;
-  shippingAddressZipCode: string;
-
-  customerId: number;
-
-  orderItemQuantity:number;
-
-  customerFirstName: string;
-  customerLastName: string;
-  customerEmail: string;
-
-  productId: number;
-
-  productName: string;
-  productImageUrl: string;
-  productDescription: string;
-  productUnitPrice: number;
+  products:Product[];
+  orderQuantity:[];
+  customerlastName:string;
+  customerfirstName:string;
+  customeremail:string;
 }

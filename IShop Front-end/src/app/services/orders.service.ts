@@ -24,6 +24,11 @@ export class OrdersService {
 interface GetResponseOrders{
   content:Order[];
 
+    size:number,
+    number : number,
+    totalElements:number,
+
+
 
 }
 

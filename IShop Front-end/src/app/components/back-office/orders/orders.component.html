@@ -1,52 +1,63 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
     <div class="container-fluid">
-      <table class="table table-bordered" *ngFor="let order of orders; let i = index">
+      <table class="table table-bordered mt-3" *ngFor="let order of orders; let i = index">
+        <tr>
+          <th class="product-tacking-number colspanth colspantd-text-color">Order Tracking Number</th>
+          <th colspan="5" class="colspanth colspantd-text-color">{{order.orderTrackingNumber}}</th>
+          <th class="colspanth" rowspan="2"><img src="../../../../assets/images/logo/iShop_LOGO_2022.png" alt="" class="img-fluid"></th>
+        </tr>
+        <tr>
+          <th class="product-tacking-number colspanth colspantd-text-color">Data</th>
+          <th colspan="5" class="colspanth colspantd-text-color">{{order.dataCreated | date :"medium"}}</th>
+        </tr>
         <tr>
           <th class="product-customer">Product Customer</th>
-          <th class="product-tacking-number">Order Tracking Number</th>
-          <th class="product-items">Product Items</th>
-          <th class="product-data">Data Created</th>
-          <th class="product-data">Data Updated</th>
+          <th colspan="5" class="product-items">Product Items</th>
           <th class="product-data">Status</th>
         </tr>
         <tr>
-          <td class="product-customer order-id"><p>{{order.customerFirstName}}</p>
-            <p>{{order.customerLastName}}</p>
-            <p>{{order.customerEmail}}</p></td>
-          <td class="product-tacking-number">{{order.orderTrackingNumber}}</td>
-          <td class="product-items">
-            <div class="row">
-              <div class="col-md-2">
-                <img [src]="order.productImageUrl" alt="" class="img-fluid" width="50px">
-              </div>
-              <div class="col-md-1 justify-content-center">
-                <p>Id: {{order.productId}}</p>
-
-              </div>
-              <div class="col-md-3 justify-content-center">
-                <p>item price: {{order.productUnitPrice | currency : "EUR" : true}}</p>
-              </div>
-              <div class="col-md-2 justify-content-center">
-                <p>item quantity: {{order.orderItemQuantity}}</p>
-              </div>
-
-
-          </div>
+          <td class="product-customer">
+             <p>Name: <b>{{order.customerfirstName}} {{order.customerlastName}}</b></p>
+            <p>Email: <b>{{order.customeremail}}</b></p>
           </td>
-          <td class="product-data">Data Created</td>
-          <td class="product-data">Data Updated</td>
+          <td colspan="5" class="product-items">
+            <div class="row">
+
+              <div *ngFor="let product of order.products; let i = index" class="col-md-6">
+                <div class="row">
+                  <div class="col-md-4">
+                    <img [src]="product.imageUrl" alt="" class="img-fluid" width="150px">
+                  </div>
+                  <div class="col-md-8">
+                    <p>Id: <b>{{product.id}}</b></p>
+                    <p>Name: <b>{{product.name}}</b></p>
+                    <p>Price: <b>{{product.unitPrice | currency : 'EUR' : true}}</b></p>
+                    <p>Quantity: <b>{{order.orderQuantity[i]}}</b></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
           <td class="product-data"><app-button [buttonText]="'Status'"></app-button>
         </tr>
-          <tr>
-            <th class="colspanth" colspan="4"></th>
-            <th class="orders-th-secondary">Total Quantity</th>
-            <th class="orders-th-secondary">Total Price</th>
-          </tr>
             <tr>
-              <td class="orders-td-secondary" colspan="4"></td>
-              <td class="orders-td-secondary" >{{order.totalQuantity}}</td>
-              <td class="orders-td-secondary" >{{order.totalPrice| currency : "EUR" : true}}</td>
+              <td class="orders-td-secondary" colspan="6">
+                <div class="row">
+                  <div class="col-md-6 border-shipping">
+                    <h6 class="">Shipping Address: </h6>
+                    <p class=""> {{order.shippingAddressCountry}} || {{order.shippingAddressState}} || {{order.shippingAddressCity}}: {{order.shippingAddressZipCode}} || {{order.shippingAddressSreet}}</p>
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="">Billing Address: </h6>
+                    <p class=""> {{order.billingAddressCountry}} || {{order.billingAddressState}} || {{order.billingAddressCity}}: {{order.billingAddressZipCode}} || {{order.billingAddressSreet}}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="orders-td-secondary total-price-quantity" colspan="1" >
+                <p> <b>Total Quantity:  {{order.totalQuantity}}</b></p>
+                <p><b> Total Price:  {{order.totalPrice| currency : "EUR" : true}}</b></p>
+               </td>
             </tr>
         </table>
         <div class="row">

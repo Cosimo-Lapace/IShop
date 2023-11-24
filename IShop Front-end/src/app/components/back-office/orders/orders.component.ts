@@ -12,7 +12,7 @@ export class OrdersComponent implements OnInit,OnDestroy {
 
   orders:Order[] = []
   pageNumber: number = 1; //number actually page
-  pageSize: number = 12; //total page number
+  pageSize: number = 5; //total page number
   totalElement: number = 0; //total elementi in the page
 
   constructor(private orderService:OrdersService){}
@@ -29,7 +29,10 @@ export class OrdersComponent implements OnInit,OnDestroy {
   getOrder() {
     this.orderService.getOrders(this.pageNumber - 1, this.pageSize).subscribe(data => {
       this.orders = data.content;
-      console.log(data.content)
+      this.pageNumber = data.number + 1,
+      this.pageSize = data.size;
+      this.totalElement = data.totalElements;
+
     });
   }
 
