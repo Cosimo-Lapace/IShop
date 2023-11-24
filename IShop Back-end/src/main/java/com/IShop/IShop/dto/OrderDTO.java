@@ -2,6 +2,7 @@ package com.IShop.IShop.dto;
 
 
 
+import com.IShop.IShop.entity.OrderItem;
 import com.IShop.IShop.entity.Product;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,9 +42,10 @@ public class OrderDTO {
     private String billingAddressStreet;
     private String billingAddressZipCode;
     private  List<Product> products;
+    private List<Integer> orderQuantity;
 
     public OrderDTO(Long id, String orderTrackingNumber, BigDecimal totalPrice, int totalQuantity, String status, Date dataCreated, Date lastUpdated, String firstName, String lastName, String email, String shippingAddressCity, String shippingAddressCountry, String shippingAddressState, String shippingAddressStreet, String shippingAddressZipCode, String billingAddressCity, String billingAddressCountry, String billingAddressState, String billingAddressStreet, String billingAddressZipCode
-    ,List<Product>products
+    ,List<Product>products,List<Integer> orderQuantity
     ) {
         this.orderId = id;
         this.orderTrackingNumber = orderTrackingNumber;
@@ -69,6 +71,7 @@ public class OrderDTO {
         this.billingAddressZipCode = billingAddressZipCode;
 
         this.products = products;
+        this.orderQuantity = orderQuantity;
 
 
 
@@ -77,8 +80,6 @@ public class OrderDTO {
     public OrderDTO() {
 
     }
-
-
 
 
 }

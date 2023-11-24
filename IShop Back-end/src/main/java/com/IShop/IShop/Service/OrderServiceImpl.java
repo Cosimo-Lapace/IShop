@@ -13,8 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 
@@ -63,10 +65,18 @@ public class OrderServiceImpl implements OrderSerivice {
 
     private OrderDTO mapOrderToOrderDTO(Order order) {
         List<OrderItem> orderItems = getOrderItem(order.getId());
+
         List<Product> products = new ArrayList<>();
+        List<Integer> orderQuantity = new ArrayList<>();
+
+
         for (OrderItem orderitem:orderItems) {
             products.add(getProductDetails(orderitem.getProductId()));
+            orderQuantity.add(orderitem.getQuantity());
         }
+
+
+
 
 
 
@@ -89,13 +99,13 @@ public class OrderServiceImpl implements OrderSerivice {
                 order.getBillingAddress().getState(),
                 order.getBillingAddress().getStreet(),
                 order.getBillingAddress().getZipCode(),
-                products
+                products,orderQuantity
+
 
         );
 
     }
     @Override
-
     public Page<OrderDTO> getAllOrders(Pageable pageable) {
 
         List<Order> orders = this.orderRepository.findAll(pageable).getContent();
