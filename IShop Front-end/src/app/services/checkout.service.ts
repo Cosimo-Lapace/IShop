@@ -2,13 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CustomValidators } from './validators/custom-validators';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckoutService {
 
-  constructor(private formBuilder: FormBuilder) { }
+  private purchaseUrl = "http://localhost:8080/api/checkout/purchase";
+
+
+  constructor(private formBuilder: FormBuilder, private httpClient:HttpClient) { }
     //initialization checkout form validators
   checkoutForm(){
     return this.formBuilder.group({
@@ -126,4 +131,13 @@ export class CheckoutService {
 
 
   }
+
+    placeOrder(purchase:any):Observable<any>{
+      return this.httpClient.post<any>(this.purchaseUrl,purchase);
+    }
+
+
+
+
+
 }

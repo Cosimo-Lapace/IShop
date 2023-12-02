@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Order } from '../model/order';
+
 import { Observable, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { OrderBackOffice } from '../model/order-back-office';
 
 
 @Injectable({
@@ -22,7 +23,7 @@ export class OrdersService {
 }
 
 interface GetResponseOrders{
-  content:Order[];
+  content:OrderBackOffice[];
 
     size:number,
     number : number,

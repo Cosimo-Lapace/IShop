@@ -2,7 +2,10 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Country } from 'src/app/model/country';
+import { Order } from 'src/app/model/order';
+import { OrderItem } from 'src/app/model/order-item';
 import { State } from 'src/app/model/state';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
@@ -41,7 +44,8 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     private checkoutService: CheckoutService,
     private countriesService: CountriesService,
-    private creditCardService:CreditCardService
+    private creditCardService:CreditCardService,
+    private router:Router
   ) {}
 
   //service for total price and quantity
@@ -217,29 +221,106 @@ export class CheckoutComponent implements OnInit {
 //---------------------------
   //submit
   onSubmit(event) {
+
     //checkbox, control checkbox status true or false, and send currectly data
     if (!this.isBillingAddress) {
       this.checkoutFormGroup.controls['billingAddress'].setValue(
         this.checkoutFormGroup.controls['shippingAddress'].value
       );
     }
+
     //last check email and confirmation email
     if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value
       ||this.checkoutFormGroup.get('customer').get('confirmEmail').value.trim() === ''
     ){
       this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors({ 'misConfirmEmail': true });
+      return;
     }else{
       this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors(null);
     }
     //-------------
-    if(this.checkoutFormGroup.invalid){
+     if(this.checkoutFormGroup.invalid){
       this.checkoutFormGroup.markAllAsTouched()
+      return;
     }
-    console.log(this.checkoutFormGroup.get('customer').value);
-    console.log(this.checkoutFormGroup.get('shippingAddress').value);
-    console.log(this.checkoutFormGroup.get('billingAddress').value);
+
+
+    //istance new order
+    let order = new Order();
+    //take total price and total quantity
+    order.totalPrice = this.totalPrice;
+    order.totalQuantity = this.totalQuantity;
+
+    //take items in the cart
+    const cartItems = this.cartService.cartItems;
+
+    //remapping cart items in order
+    let orderItems:OrderItem[] = cartItems.map(item => new OrderItem(item));
+
+
+    const billingcountry:Country = this.checkoutFormGroup.get("billingAddress").get("country").value
+    const shippingcountry:Country = this.checkoutFormGroup.get("shippingAddress").get("country").value
+    const postData = {
+      customer: {
+        firstName: this.checkoutFormGroup.get("customer").get("firstName").value,
+        lastName: this.checkoutFormGroup.get("customer").get("lastName").value,
+        email: this.checkoutFormGroup.get("customer").get("email").value
+      },
+      shippingAddress: {
+        street: this.checkoutFormGroup.get("shippingAddress").get("street").value,
+        city: this.checkoutFormGroup.get("shippingAddress").get("city").value,
+        state: this.checkoutFormGroup.get("shippingAddress").get("state").value,
+        country: shippingcountry.name,
+        zipCode: this.checkoutFormGroup.get("shippingAddress").get("postalCode").value
+      },
+      billingAddress: {
+        street: this.checkoutFormGroup.get("billingAddress").get("street").value,
+        city: this.checkoutFormGroup.get("billingAddress").get("city").value,
+        state: this.checkoutFormGroup.get("billingAddress").get("state").value,
+        country: billingcountry.name,
+        zipCode: this.checkoutFormGroup.get("billingAddress").get("postalCode").value
+      },
+      order: order,
+      orderItems: orderItems
+    };
+    this.checkoutService.placeOrder(postData).subscribe(
+      {
+        next: response =>{
+          alert("Your order has been received " + response.orderTrackingNumber);
+          this.resetCart();
+        },
+        error: err =>{
+          alert("error" + err.message)
+        }
+      }
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
+  resetCart(){
+    //clean cart
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice.next(0);
+    this.cartService.totalQuantity.next(0);
+    //clean form
+    this.checkoutFormGroup.reset();
+    //back navigate
+    this.router.navigateByUrl("");
+
+  }
   ngOnInit(): void {
     this.checkoutForm();
     this.checkoutPriceAndQuantity();

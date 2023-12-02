@@ -74,6 +74,8 @@
           </div>
         </div>
       </div>
+
+
       <div class="input-space">
         <label class="au-checkbox">
           <input type="checkbox" checked="checked" (change)="billingAddress($event)">
@@ -183,7 +185,8 @@
         </div>
       </div>
       <div class="text-center">
-        <button type="submit" [disabled]="checkoutFormGroup.invalid"  class="btn btn-info">Purchase</button>
+        <button type="submit"   class="btn btn-info">Purchase</button>
+        <!-- [disabled]="checkoutFormGroup.invalid" -->
       </div>
     </form>
     </div>

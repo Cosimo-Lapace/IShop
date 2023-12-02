@@ -1,6 +1,6 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Customer } from 'src/app/model/customer';
-import { Order } from 'src/app/model/order';
+import { OrderBackOffice } from 'src/app/model/order-back-office';
 import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { OrdersService } from 'src/app/services/orders.service';
 })
 export class OrdersComponent implements OnInit,OnDestroy {
 
-  orders:Order[] = []
+  orders:OrderBackOffice[] = []
   pageNumber: number = 1; //number actually page
   pageSize: number = 5; //total page number
   totalElement: number = 0; //total elementi in the page
