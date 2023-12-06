@@ -171,22 +171,21 @@
           </div>
         </div>
       </div>
-
       <div class="form-area review">
         <h3>Review Your Order</h3>
         <b>Total Quantity: {{ totalQuantity }}</b>
         <h4>Shipping: FREE</h4>
         <B>Total Price: {{ totalPrice | currency : "EUR" : true }}</B>
-        <div class="input-space term">
+        <div class="input-space term" formGroupName="terms">
           <label class="au-checkbox">
-            <input type="checkbox">
-            <span class="au-checkmark"></span>Accept Terms and Conditions of Sale
+            <input type="checkbox" formControlName="term" (change)="terms()">
+            <span class="au-checkmark"></span><span [ngClass]="{'error-text':termsAndCondition.invalid && (termsAndCondition.dirty || termsAndCondition.touched)}">Accept Terms and Conditions of Sale</span>
           </label>
+
         </div>
       </div>
       <div class="text-center">
-        <button type="submit"   class="btn btn-info">Purchase</button>
-        <!-- [disabled]="checkoutFormGroup.invalid" -->
+        <button type="submit"  class="btn btn-info">Purchase</button>
       </div>
     </form>
     </div>

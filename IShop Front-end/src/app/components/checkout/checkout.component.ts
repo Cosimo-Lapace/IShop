@@ -1,8 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormGroup,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Country } from 'src/app/model/country';
 import { Order } from 'src/app/model/order';
 import { OrderItem } from 'src/app/model/order-item';
@@ -18,7 +19,7 @@ import { CreditCardService } from 'src/app/services/credit-card.service';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit,OnDestroy {
   //initial page
   checkoutFormGroup: FormGroup; //form
   isBillingAddress: boolean = false; //checkbox
@@ -38,7 +39,11 @@ export class CheckoutComponent implements OnInit {
   //end page
   totalPrice: number = 0; //total price order
   totalQuantity: number = 0; // total quantity order
+  //terms
+  IsTermValid:boolean = false;
   //------
+  private subscription:Subscription;
+
 
   constructor(
     private cartService: CartService,
@@ -48,10 +53,11 @@ export class CheckoutComponent implements OnInit {
     private router:Router
   ) {}
 
+
   //service for total price and quantity
   checkoutPriceAndQuantity() {
-    this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
-    this.cartService.totalQuantity.subscribe(
+   this.subscription = this.cartService.totalPrice.subscribe((data) => (this.totalPrice = data));
+   this.subscription = this.cartService.totalQuantity.subscribe(
       (data) => (this.totalQuantity = data)
     );
   }
@@ -65,7 +71,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   getCountriesAndStates() {
-    this.countriesService
+   this.subscription = this.countriesService
       .getCountries()
       .subscribe((data) => (this.countries = data));
   }
@@ -74,7 +80,7 @@ export class CheckoutComponent implements OnInit {
     const formGroup = this.checkoutFormGroup.get(formGroupName);
     const countryCode = formGroup.value.country.code;
 
-    this.countriesService.getStates(countryCode).subscribe((data) => {
+   this.subscription = this.countriesService.getStates(countryCode).subscribe((data) => {
       if (formGroupName === 'shippingAddress') {
         this.shippingAddressStates = data;
       } else {
@@ -88,10 +94,10 @@ export class CheckoutComponent implements OnInit {
     //get years and months
     const startMonth = new Date().getMonth() + 1;
     const currentYear: number = new Date().getFullYear();
-    this.checkoutService
+  this.subscription = this.checkoutService
       .getMonths(startMonth)
       .subscribe((data) => (this.cardSecutityMonth = data));
-    this.checkoutService
+   this.subscription= this.checkoutService
       .getYears(currentYear)
       .subscribe((data) => (this.cardSecutityYear = data));
     //------
@@ -104,7 +110,7 @@ export class CheckoutComponent implements OnInit {
     } else {
       startMonth = new Date().getMonth() + 1;
     }
-    this.checkoutService
+  this.subscription =  this.checkoutService
       .getMonths(startMonth)
       .subscribe((data) => (this.cardSecutityMonth = data));
   }
@@ -128,9 +134,24 @@ export class CheckoutComponent implements OnInit {
         this.cardTypeImg = ""
         this.isCardTypeImg = false;
    }
+
+   if(cardType === ""){
+    this.checkoutFormGroup.get("creditCard").get("cardType").setErrors({ 'invalid': true });
+   }else{
+    this.checkoutFormGroup.get("creditCard").get("cardType").setErrors(null);;
+   }
+
     this.cardType.nativeElement.value = cardType
   }
+  terms() {
+    this.IsTermValid = !this.IsTermValid;
 
+    if (this.IsTermValid) {
+      this.checkoutFormGroup.get("terms").get("term").setErrors(null);
+    } else {
+      this.checkoutFormGroup.get("terms").get("term").setErrors({ 'invalid': true });
+    }
+  }
 
   checkoutForm() {
     this.checkoutFormGroup = this.checkoutService.checkoutForm();
@@ -210,6 +231,9 @@ export class CheckoutComponent implements OnInit {
   get creditCardSecutityCode(){
     return this.checkoutFormGroup.get('creditCard.cardSecutityCode')
   }
+  get termsAndCondition(){
+    return this.checkoutFormGroup.get("terms.term")
+  }
 
 
 
@@ -228,7 +252,14 @@ export class CheckoutComponent implements OnInit {
         this.checkoutFormGroup.controls['shippingAddress'].value
       );
     }
-
+    if(!this.IsTermValid){
+      this.checkoutFormGroup.markAllAsTouched()
+      return
+    }
+    if(this.checkoutFormGroup.invalid){
+      this.checkoutFormGroup.markAllAsTouched()
+      return;
+    }
     //last check email and confirmation email
     if(this.checkoutFormGroup.get('customer').get('email').value !== this.checkoutFormGroup.get('customer').get('confirmEmail').value
       ||this.checkoutFormGroup.get('customer').get('confirmEmail').value.trim() === ''
@@ -239,10 +270,7 @@ export class CheckoutComponent implements OnInit {
       this.checkoutFormGroup.get('customer').get('confirmEmail').setErrors(null);
     }
     //-------------
-     if(this.checkoutFormGroup.invalid){
-      this.checkoutFormGroup.markAllAsTouched()
-      return;
-    }
+
 
 
     //istance new order
@@ -283,7 +311,7 @@ export class CheckoutComponent implements OnInit {
       order: order,
       orderItems: orderItems
     };
-    this.checkoutService.placeOrder(postData).subscribe(
+  this.subscription =  this.checkoutService.placeOrder(postData).subscribe(
       {
         next: response =>{
           alert("Your order has been received " + response.orderTrackingNumber);
@@ -294,20 +322,6 @@ export class CheckoutComponent implements OnInit {
         }
       }
     );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   }
 
   resetCart(){
@@ -324,5 +338,8 @@ export class CheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.checkoutForm();
     this.checkoutPriceAndQuantity();
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

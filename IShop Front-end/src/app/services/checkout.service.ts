@@ -100,6 +100,11 @@ export class CheckoutService {
         cardSecutityMonth: [''],
         cardSecutityYear: [''],
       }),
+      terms: this.formBuilder.group({
+        term: new FormControl('',[
+          Validators.required
+        ])
+      })
     });
   }
 

@@ -49,6 +49,9 @@
 .error-input{
   border-color: var(--primary-color) !important;
 }
+.error-text{
+  color: var(--primary-color);
+}
 .error-div{
   color: var(--primary-color);
 }
