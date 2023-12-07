@@ -41,6 +41,7 @@ export class CheckoutComponent implements OnInit,OnDestroy {
   totalQuantity: number = 0; // total quantity order
   //terms
   IsTermValid:boolean = false;
+  orderTrackingInViewPage:string;
   //------
   private subscription:Subscription;
 
@@ -314,7 +315,7 @@ export class CheckoutComponent implements OnInit,OnDestroy {
   this.subscription =  this.checkoutService.placeOrder(postData).subscribe(
       {
         next: response =>{
-          alert("Your order has been received " + response.orderTrackingNumber);
+        this.orderTrackingInViewPage = response.orderTrackingNumber;
           this.resetCart();
         },
         error: err =>{
@@ -332,7 +333,8 @@ export class CheckoutComponent implements OnInit,OnDestroy {
     //clean form
     this.checkoutFormGroup.reset();
     //back navigate
-    this.router.navigateByUrl("");
+    this.checkoutService.isCheckoutSuccessTrue();
+    this.router.navigateByUrl(`checkout/success/${this.orderTrackingInViewPage}`);
 
   }
   ngOnInit(): void {

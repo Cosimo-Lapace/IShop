@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class CheckoutService {
 
   private purchaseUrl = "http://localhost:8080/api/checkout/purchase";
+  private CheckoutSuccess:boolean = false;
 
 
   constructor(private formBuilder: FormBuilder, private httpClient:HttpClient) { }
@@ -141,7 +142,15 @@ export class CheckoutService {
       return this.httpClient.post<any>(this.purchaseUrl,purchase);
     }
 
-
+    isCheckoutSuccessTrue(){
+      this.CheckoutSuccess = true;
+    }
+    isCheckoutSuccessFalse(){
+      this.CheckoutSuccess = false;
+    }
+    isCheckoutSuccess() :boolean{
+      return this.CheckoutSuccess;
+    }
 
 
 

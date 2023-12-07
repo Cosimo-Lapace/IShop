@@ -6,6 +6,8 @@ import { ProductDetailComponent } from './components/product-components/product-
 import { CartDetailComponent } from './components/cart-components/cart-detail/cart-detail.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrdersComponent } from './components/back-office/orders/orders.component';
+import { CheckoutSuccessComponent } from './components/checkout/checkout-success/checkout-success.component';
+import { CheckoutSuccessGuard } from './guards/checkout-success.guard';
 
 const routes: Routes = [
   {
@@ -35,6 +37,11 @@ const routes: Routes = [
   {
     path:'checkout',
     component:CheckoutComponent
+  },
+  {
+    path:'checkout/success/:orderTrackingNumber',
+    component:CheckoutSuccessComponent,
+    canActivate:[CheckoutSuccessGuard]
   },
   {
     path: '',

@@ -23,6 +23,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import {  ReactiveFormsModule } from '@angular/forms';
 import { ErrorMessageCheckoutComponent } from './utilities/error-message-checkout/error-message-checkout.component';
 import { OrdersComponent } from './components/back-office/orders/orders.component';
+import { CheckoutSuccessComponent } from './components/checkout/checkout-success/checkout-success.component';
+
 
 
 
@@ -47,6 +49,7 @@ import { OrdersComponent } from './components/back-office/orders/orders.componen
     CheckoutComponent,
     ErrorMessageCheckoutComponent,
     OrdersComponent,
+    CheckoutSuccessComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgbModule,ReactiveFormsModule],
   providers: [],
